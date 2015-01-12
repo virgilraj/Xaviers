@@ -1,0 +1,80 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/* Data Grid*/
+
+.containerDiv {
+  border: 1px solid #3697f6;
+  width: 100%; display:table
+}
+.rowDivHeader {
+  border: 1px solid #668db6;
+  background-color: #336799;
+  color: white;
+  font-weight: bold; display:table-row
+}
+.rowDiv {
+  border: 1px solid #668db6;
+  background-color: #cee6fe;
+  display:table-row
+}
+.cellDivHeader {
+  border-right: 1px solid white;
+  display: table-cell;
+  width:12%;
+  padding: 1px;
+  text-align: center; 
+}
+.cellDiv {
+  border-right: 2px solid white;
+  display: table-cell;
+  width:10%;
+  padding-right: 4px;
+  text-align: center;
+  border-bottom: none;
+}
+
+.lastCell {
+  border-right: none;
+}

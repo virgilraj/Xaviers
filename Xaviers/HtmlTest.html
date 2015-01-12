@@ -1,0 +1,32 @@
+﻿<html>
+<head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day' ,'asdasd'],
+              ['Work', 11, 23],
+              ['Eat', 2, 32],
+              ['Commute', 2, 55],
+              ['Watch TV', 2, 23],
+              ['Sleep', 7,3]
+            ]);
+
+            var options = {
+                title: 'My Daily Activities',
+                is3D: true
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+</body>
+</html>

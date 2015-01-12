@@ -1,0 +1,1517 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XaviersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountBalance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="FinanceYear" Type="int" />
+          <Property Name="OpeningBalance" Type="float" />
+          <Property Name="ClosingBlance" Type="float" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="15" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="70" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="70" />
+          <Property Name="City" Type="nvarchar" MaxLength="70" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="70" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="ComAddress1" Type="nvarchar" MaxLength="70" />
+          <Property Name="ComAddress" Type="nvarchar" MaxLength="70" />
+          <Property Name="ComCity" Type="nvarchar" MaxLength="70" />
+          <Property Name="ComState" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComCountry" Type="nvarchar" MaxLength="70" />
+          <Property Name="ComPinCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="17" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="17" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Qualification" Type="nvarchar" MaxLength="100" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="SpouseId" Type="int" />
+          <Property Name="SpouseName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="100" />
+          <Property Name="HasImage" Type="bit" />
+          <Property Name="YearIncome" Type="int" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="DOD" Type="date" />
+          <Property Name="DOL" Type="date" />
+          <Property Name="BaptismDate" Type="date" />
+          <Property Name="Eucharist" Type="date" />
+          <Property Name="Reconciliation" Type="date" />
+          <Property Name="Confirmation" Type="date" />
+          <Property Name="Marriage" Type="date" />
+          <Property Name="HolyOrders" Type="date" />
+          <Property Name="AnointingoftheSick" Type="date" />
+          <Property Name="FatherId" Type="int" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MotherId" Type="int" />
+          <Property Name="MotherName" Type="nvarchar" MaxLength="100" />
+          <Property Name="GuardianId" Type="int" />
+          <Property Name="GuardianName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsMember" Type="bit" />
+          <Property Name="IsEligibleForTax" Type="bit" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" />
+          <Property Name="Title" Type="nvarchar" MaxLength="15" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="70" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="70" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="17" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="70" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="70" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="70" />
+          <Property Name="City" Type="nvarchar" MaxLength="70" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="70" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="70" />
+          <Property Name="HasLogo" Type="bit" />
+          <Property Name="StartFinaceYer" Type="int" />
+          <Property Name="CurrentFinanceyear" Type="int" />
+          <Property Name="OpeningBalance" Type="float" />
+          <Property Name="BankAndAcNo1" Type="nvarchar" MaxLength="70" />
+          <Property Name="BankAndAcNo2" Type="nvarchar" MaxLength="70" />
+          <Property Name="BankAndAcNo3" Type="nvarchar" MaxLength="70" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Expense">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="250" />
+          <Property Name="GivenDate" Type="date" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="75" />
+          <Property Name="ReceiverId" Type="int" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="BillNumber" Type="varchar" MaxLength="16" />
+          <Property Name="BillDate" Type="date" />
+          <Property Name="HasImage" Type="bit" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="ReceivedDate" Type="date" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="75" />
+          <Property Name="ReceiverId" Type="int" />
+          <Property Name="ReceiverName" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="IncomeExpenseGroup">
+          <Key>
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="GroupName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="InterestRate" Type="float" />
+          <Property Name="LoanType" Type="nvarchar" MaxLength="10" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="LoanStatus" Type="nvarchar" MaxLength="5" />
+          <Property Name="InstalmentPeriod" Type="int" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="SanctionDate" Type="date" />
+          <Property Name="Source" Type="nvarchar" MaxLength="50" />
+          <Property Name="LateFee" Type="float" />
+          <Property Name="InstalmentDueDay" Type="int" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LoanCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoanId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Interest" Type="float" />
+          <Property Name="LateFee" Type="float" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="Date" Type="date" />
+          <Property Name="ReceiverId" Type="int" />
+          <Property Name="ReceiverName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Qualification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="Qualification" Type="nvarchar" MaxLength="100" />
+          <Property Name="University" Type="nvarchar" MaxLength="100" />
+          <Property Name="Collage" Type="nvarchar" MaxLength="100" />
+          <Property Name="StudyPeriod" Type="varchar" MaxLength="20" />
+          <Property Name="MarksOrGrad" Type="varchar" MaxLength="10" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RecurringTax">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="TaxName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="MonthlyAmount" Type="float" />
+          <Property Name="YearlyAmount" Type="float" />
+          <Property Name="LifetimeAmount" Type="float" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RecurringTaxCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecurringTaxId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="TaxName" Type="nvarchar" MaxLength="70" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="ReceivedDate" Type="date" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="ReceiverId" Type="int" />
+          <Property Name="ReceiverName" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="PayType" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SmallSavingsCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ReceiverName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ReceiverId" Type="int" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SmallSavingsSettlement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="200" />
+          <Property Name="GivenName" Type="nvarchar" MaxLength="200" />
+          <Property Name="GivenId" Type="int" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tax">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaxName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="TaxAmount" Type="float" />
+          <Property Name="TaxPercentBaseIncome" Type="float" />
+          <Property Name="TaxNoOfDaysIncome" Type="int" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="ExceptedAmount" Type="float" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TaxCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaxId" Type="int" />
+          <Property Name="TaxName" Type="nvarchar" MaxLength="70" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="ReceivedDate" Type="date" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="ReceiverId" Type="int" />
+          <Property Name="ReceiverName" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TaxExcludedMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaxId" Type="int" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="150" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblColumns">
+          <Key>
+            <PropertyRef Name="ColumnId" />
+          </Key>
+          <Property Name="ColumnId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="TableName" Type="varchar" MaxLength="50" />
+          <Property Name="ColumnName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ColumnDispName" Type="nvarchar" MaxLength="70" />
+          <Property Name="DataType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="Role" Type="varchar" MaxLength="25" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WorkExperience">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CompanyAndAddress" Type="nvarchar" MaxLength="250" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="DOJ" Type="date" />
+          <Property Name="DOL" Type="date" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_LoanCollection_Loan">
+          <End Role="Loan" Type="Self.Loan" Multiplicity="1" />
+          <End Role="LoanCollection" Type="Self.LoanCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoanCollection">
+              <PropertyRef Name="LoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qualification_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="Qualification">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecurringTaxCollection_RecurringTax">
+          <End Role="RecurringTax" Type="Self.RecurringTax" Multiplicity="1" />
+          <End Role="RecurringTaxCollection" Type="Self.RecurringTaxCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecurringTax">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecurringTaxCollection">
+              <PropertyRef Name="RecurringTaxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxCollection_TaxCollection">
+          <End Role="Tax" Type="Self.Tax" Multiplicity="0..1" />
+          <End Role="TaxCollection" Type="Self.TaxCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaxCollection">
+              <PropertyRef Name="TaxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxExcludedMember_Tax">
+          <End Role="Tax" Type="Self.Tax" Multiplicity="0..1" />
+          <End Role="TaxExcludedMember" Type="Self.TaxExcludedMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaxExcludedMember">
+              <PropertyRef Name="TaxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkExperience_WorkExperience">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="WorkExperience" Type="Self.WorkExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="WorkExperience">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="UpdateContactName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ContactId" Type="int" Mode="In" />
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="ContactName" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="XaviersModelStoreContainer">
+          <EntitySet Name="AccountBalance" EntityType="Self.AccountBalance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Expense" EntityType="Self.Expense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Income" EntityType="Self.Income" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IncomeExpenseGroup" EntityType="Self.IncomeExpenseGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loan" EntityType="Self.Loan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanCollection" EntityType="Self.LoanCollection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qualification" EntityType="Self.Qualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecurringTax" EntityType="Self.RecurringTax" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecurringTaxCollection" EntityType="Self.RecurringTaxCollection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SmallSavingsCollection" EntityType="Self.SmallSavingsCollection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SmallSavingsSettlement" EntityType="Self.SmallSavingsSettlement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaxCollection" EntityType="Self.TaxCollection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaxExcludedMember" EntityType="Self.TaxExcludedMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblColumns" EntityType="Self.tblColumns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkExperience" EntityType="Self.WorkExperience" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_LoanCollection_Loan" Association="Self.FK_LoanCollection_Loan">
+            <End Role="Loan" EntitySet="Loan" />
+            <End Role="LoanCollection" EntitySet="LoanCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qualification_Contact" Association="Self.FK_Qualification_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Qualification" EntitySet="Qualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecurringTaxCollection_RecurringTax" Association="Self.FK_RecurringTaxCollection_RecurringTax">
+            <End Role="RecurringTax" EntitySet="RecurringTax" />
+            <End Role="RecurringTaxCollection" EntitySet="RecurringTaxCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxCollection_TaxCollection" Association="Self.FK_TaxCollection_TaxCollection">
+            <End Role="Tax" EntitySet="Tax" />
+            <End Role="TaxCollection" EntitySet="TaxCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxExcludedMember_Tax" Association="Self.FK_TaxExcludedMember_Tax">
+            <End Role="Tax" EntitySet="Tax" />
+            <End Role="TaxExcludedMember" EntitySet="TaxExcludedMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Contact" Association="Self.FK_Users_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkExperience_WorkExperience" Association="Self.FK_WorkExperience_WorkExperience">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="WorkExperience" EntitySet="WorkExperience" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XaviersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ComAddress1" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="ComAddress" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="ComCity" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="ComState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComCountry" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="ComPinCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Qualification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SpouseId" Type="Int32" />
+          <Property Name="SpouseName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HasImage" Type="Boolean" />
+          <Property Name="YearIncome" Type="Int32" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="DOD" Type="DateTime" Precision="0" />
+          <Property Name="BaptismDate" Type="DateTime" Precision="0" />
+          <Property Name="Eucharist" Type="DateTime" Precision="0" />
+          <Property Name="Reconciliation" Type="DateTime" Precision="0" />
+          <Property Name="Confirmation" Type="DateTime" Precision="0" />
+          <Property Name="Marriage" Type="DateTime" Precision="0" />
+          <Property Name="HolyOrders" Type="DateTime" Precision="0" />
+          <Property Name="AnointingoftheSick" Type="DateTime" Precision="0" />
+          <Property Name="FatherId" Type="Int32" />
+          <Property Name="FatherName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MotherId" Type="Int32" />
+          <Property Name="MotherName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GuardianId" Type="Int32" />
+          <Property Name="GuardianName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsMember" Type="Boolean" />
+          <Property Name="IsEligibleForTax" Type="Boolean" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Qualifications" Relationship="Self.FK_Qualification_Contact" FromRole="Contact" ToRole="Qualification" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Contact" FromRole="Contact" ToRole="Users" />
+          <NavigationProperty Name="WorkExperiences" Relationship="Self.FK_WorkExperience_WorkExperience" FromRole="Contact" ToRole="WorkExperience" />
+          <Property Name="DOL" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="Purpose" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="HasLogo" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="Title" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="StartFinaceYer" Type="Int32" />
+          <Property Name="OpeningBalance" Type="Double" />
+          <Property Name="BankAndAcNo1" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="BankAndAcNo2" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="BankAndAcNo3" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentFinanceyear" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Expense">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Reason" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GivenDate" Type="DateTime" Precision="0" />
+          <Property Name="ContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="GroupName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiverId" Type="Int32" />
+          <Property Name="IsApprove" Type="Boolean" />
+          <Property Name="BillNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="BillDate" Type="DateTime" Precision="0" />
+          <Property Name="HasImage" Type="Boolean" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReceivedDate" Type="DateTime" Precision="0" />
+          <Property Name="ContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="GroupName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiverId" Type="Int32" />
+          <Property Name="ReceiverName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsApprove" Type="Boolean" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="IncomeExpenseGroup">
+          <Key>
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="GroupName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Qualification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Qualification1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="University" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Collage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StudyPeriod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MarksOrGrad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tax">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaxName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="TaxAmount" Type="Double" />
+          <Property Name="TaxPercentBaseIncome" Type="Double" />
+          <Property Name="TaxNoOfDaysIncome" Type="Int32" />
+          <Property Name="IsApprove" Type="Boolean" />
+          <Property Name="ExceptedAmount" Type="Double" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TaxCollections" Relationship="Self.FK_TaxCollection_TaxCollection" FromRole="Tax" ToRole="TaxCollection" />
+          <NavigationProperty Name="TaxExcludedMembers" Relationship="Self.FK_TaxExcludedMember_Tax" FromRole="Tax" ToRole="TaxExcludedMember" />
+        </EntityType>
+        <EntityType Name="TaxCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaxId" Type="Int32" />
+          <Property Name="TaxName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReceivedDate" Type="DateTime" Precision="0" />
+          <Property Name="ContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="ReceiverId" Type="Int32" />
+          <Property Name="ReceiverName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsApprove" Type="Boolean" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TaxExcludedMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaxId" Type="Int32" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="ContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblColumn">
+          <Key>
+            <PropertyRef Name="ColumnId" />
+          </Key>
+          <Property Name="ColumnId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ColumnName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ColumnDispName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="DataType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Role" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="WorkExperience">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="CompanyAndAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DOJ" Type="DateTime" Precision="0" />
+          <Property Name="DOL" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Qualification_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="Qualification">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkExperience_WorkExperience">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="WorkExperience" Type="Self.WorkExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="WorkExperience">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxCollection_TaxCollection">
+          <End Role="Tax" Type="Self.Tax" Multiplicity="0..1" />
+          <End Role="TaxCollection" Type="Self.TaxCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaxCollection">
+              <PropertyRef Name="TaxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxExcludedMember_Tax">
+          <End Role="Tax" Type="Self.Tax" Multiplicity="0..1" />
+          <End Role="TaxExcludedMember" Type="Self.TaxExcludedMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tax">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaxExcludedMember">
+              <PropertyRef Name="TaxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="XaviersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contacts" EntityType="Self.Contact" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Expenses" EntityType="Self.Expense" />
+          <EntitySet Name="Incomes" EntityType="Self.Income" />
+          <EntitySet Name="IncomeExpenseGroups" EntityType="Self.IncomeExpenseGroup" />
+          <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
+          <EntitySet Name="Taxes" EntityType="Self.Tax" />
+          <EntitySet Name="TaxCollections" EntityType="Self.TaxCollection" />
+          <EntitySet Name="TaxExcludedMembers" EntityType="Self.TaxExcludedMember" />
+          <EntitySet Name="tblColumns" EntityType="Self.tblColumn" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="WorkExperiences" EntityType="Self.WorkExperience" />
+          <AssociationSet Name="FK_Qualification_Contact" Association="Self.FK_Qualification_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Qualification" EntitySet="Qualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Contact" Association="Self.FK_Users_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkExperience_WorkExperience" Association="Self.FK_WorkExperience_WorkExperience">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="WorkExperience" EntitySet="WorkExperiences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxCollection_TaxCollection" Association="Self.FK_TaxCollection_TaxCollection">
+            <End Role="Tax" EntitySet="Taxes" />
+            <End Role="TaxCollection" EntitySet="TaxCollections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxExcludedMember_Tax" Association="Self.FK_TaxExcludedMember_Tax">
+            <End Role="Tax" EntitySet="Taxes" />
+            <End Role="TaxExcludedMember" EntitySet="TaxExcludedMembers" />
+          </AssociationSet>
+          <EntitySet Name="RecurringTaxes" EntityType="XaviersModel.RecurringTax" />
+          <EntitySet Name="RecurringTaxCollections" EntityType="XaviersModel.RecurringTaxCollection" />
+          <AssociationSet Name="FK_RecurringTaxCollection_RecurringTax" Association="XaviersModel.FK_RecurringTaxCollection_RecurringTax">
+            <End Role="RecurringTax" EntitySet="RecurringTaxes" />
+            <End Role="RecurringTaxCollection" EntitySet="RecurringTaxCollections" />
+          </AssociationSet>
+          <FunctionImport Name="UpdateContactName">
+            <Parameter Name="ContactId" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="ContactName" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="AccountBalances" EntityType="XaviersModel.AccountBalance" />
+          <EntitySet Name="SmallSavingsCollections" EntityType="XaviersModel.SmallSavingsCollection" />
+          <EntitySet Name="SmallSavingsSettlements" EntityType="XaviersModel.SmallSavingsSettlement" />
+          <EntitySet Name="Loans" EntityType="XaviersModel.Loan" />
+          <EntitySet Name="LoanCollections" EntityType="XaviersModel.LoanCollection" />
+          <AssociationSet Name="FK_LoanCollection_Loan" Association="XaviersModel.FK_LoanCollection_Loan">
+            <End Role="Loan" EntitySet="Loans" />
+            <End Role="LoanCollection" EntitySet="LoanCollections" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RecurringTax">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="TaxName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="MonthlyAmount" Type="Double" />
+          <Property Name="YearlyAmount" Type="Double" />
+          <Property Name="LifetimeAmount" Type="Double" />
+          <Property Name="IsApprove" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RecurringTaxCollections" Relationship="XaviersModel.FK_RecurringTaxCollection_RecurringTax" FromRole="RecurringTax" ToRole="RecurringTaxCollection" />
+        </EntityType>
+        <EntityType Name="RecurringTaxCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecurringTaxId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReceivedDate" Type="DateTime" Precision="0" />
+          <Property Name="ContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="ReceiverId" Type="Int32" />
+          <Property Name="ReceiverName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsApprove" Type="Boolean" />
+          <Property Name="PayType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="TaxName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_RecurringTaxCollection_RecurringTax">
+          <End Type="XaviersModel.RecurringTax" Role="RecurringTax" Multiplicity="1" />
+          <End Type="XaviersModel.RecurringTaxCollection" Role="RecurringTaxCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecurringTax">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecurringTaxCollection">
+              <PropertyRef Name="RecurringTaxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccountBalance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="FinanceYear" Type="Int32" />
+          <Property Name="OpeningBalance" Type="Double" />
+          <Property Name="ClosingBlance" Type="Double" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SmallSavingsCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="ContactName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiverName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiverId" Type="Int32" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="IsApprove" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="SmallSavingsSettlement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="ContactName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GivenName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GivenId" Type="Int32" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="IsApprove" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="ContactName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="InterestRate" Type="Double" />
+          <Property Name="LoanType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsApprove" Type="Boolean" />
+          <Property Name="LoanStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="InstalmentPeriod" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="SanctionDate" Type="DateTime" Precision="0" />
+          <Property Name="Source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LateFee" Type="Double" />
+          <Property Name="InstalmentDueDay" Type="Int32" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LoanCollections" Relationship="XaviersModel.FK_LoanCollection_Loan" FromRole="Loan" ToRole="LoanCollection" />
+        </EntityType>
+        <EntityType Name="LoanCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoanId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="ContactName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Interest" Type="Double" />
+          <Property Name="LateFee" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsApprove" Type="Boolean" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="ReceiverId" Type="Int32" />
+          <Property Name="ReceiverName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_LoanCollection_Loan">
+          <End Type="XaviersModel.Loan" Role="Loan" Multiplicity="1" />
+          <End Type="XaviersModel.LoanCollection" Role="LoanCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoanCollection">
+              <PropertyRef Name="LoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XaviersModelStoreContainer" CdmEntityContainer="XaviersEntities">
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="XaviersModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="DOL" ColumnName="DOL" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="ComAddress1" ColumnName="ComAddress1" />
+                <ScalarProperty Name="ComAddress" ColumnName="ComAddress" />
+                <ScalarProperty Name="ComCity" ColumnName="ComCity" />
+                <ScalarProperty Name="ComState" ColumnName="ComState" />
+                <ScalarProperty Name="ComCountry" ColumnName="ComCountry" />
+                <ScalarProperty Name="ComPinCode" ColumnName="ComPinCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="SpouseId" ColumnName="SpouseId" />
+                <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="HasImage" ColumnName="HasImage" />
+                <ScalarProperty Name="YearIncome" ColumnName="YearIncome" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DOD" ColumnName="DOD" />
+                <ScalarProperty Name="BaptismDate" ColumnName="BaptismDate" />
+                <ScalarProperty Name="Eucharist" ColumnName="Eucharist" />
+                <ScalarProperty Name="Reconciliation" ColumnName="Reconciliation" />
+                <ScalarProperty Name="Confirmation" ColumnName="Confirmation" />
+                <ScalarProperty Name="Marriage" ColumnName="Marriage" />
+                <ScalarProperty Name="HolyOrders" ColumnName="HolyOrders" />
+                <ScalarProperty Name="AnointingoftheSick" ColumnName="AnointingoftheSick" />
+                <ScalarProperty Name="FatherId" ColumnName="FatherId" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="MotherId" ColumnName="MotherId" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="GuardianId" ColumnName="GuardianId" />
+                <ScalarProperty Name="GuardianName" ColumnName="GuardianName" />
+                <ScalarProperty Name="IsMember" ColumnName="IsMember" />
+                <ScalarProperty Name="IsEligibleForTax" ColumnName="IsEligibleForTax" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="XaviersModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CurrentFinanceyear" ColumnName="CurrentFinanceyear" />
+                <ScalarProperty Name="BankAndAcNo3" ColumnName="BankAndAcNo3" />
+                <ScalarProperty Name="BankAndAcNo2" ColumnName="BankAndAcNo2" />
+                <ScalarProperty Name="BankAndAcNo1" ColumnName="BankAndAcNo1" />
+                <ScalarProperty Name="OpeningBalance" ColumnName="OpeningBalance" />
+                <ScalarProperty Name="StartFinaceYer" ColumnName="StartFinaceYer" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="HasLogo" ColumnName="HasLogo" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="XaviersModel.Expense">
+              <MappingFragment StoreEntitySet="Expense">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="GivenDate" ColumnName="GivenDate" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+                <ScalarProperty Name="BillDate" ColumnName="BillDate" />
+                <ScalarProperty Name="HasImage" ColumnName="HasImage" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incomes">
+            <EntityTypeMapping TypeName="XaviersModel.Income">
+              <MappingFragment StoreEntitySet="Income">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="ReceiverName" ColumnName="ReceiverName" />
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncomeExpenseGroups">
+            <EntityTypeMapping TypeName="XaviersModel.IncomeExpenseGroup">
+              <MappingFragment StoreEntitySet="IncomeExpenseGroup">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qualifications">
+            <EntityTypeMapping TypeName="XaviersModel.Qualification">
+              <MappingFragment StoreEntitySet="Qualification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Qualification1" ColumnName="Qualification" />
+                <ScalarProperty Name="University" ColumnName="University" />
+                <ScalarProperty Name="Collage" ColumnName="Collage" />
+                <ScalarProperty Name="StudyPeriod" ColumnName="StudyPeriod" />
+                <ScalarProperty Name="MarksOrGrad" ColumnName="MarksOrGrad" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taxes">
+            <EntityTypeMapping TypeName="XaviersModel.Tax">
+              <MappingFragment StoreEntitySet="Tax">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TaxName" ColumnName="TaxName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="TaxPercentBaseIncome" ColumnName="TaxPercentBaseIncome" />
+                <ScalarProperty Name="TaxNoOfDaysIncome" ColumnName="TaxNoOfDaysIncome" />
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="ExceptedAmount" ColumnName="ExceptedAmount" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaxCollections">
+            <EntityTypeMapping TypeName="XaviersModel.TaxCollection">
+              <MappingFragment StoreEntitySet="TaxCollection">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="TaxName" ColumnName="TaxName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="ReceiverName" ColumnName="ReceiverName" />
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaxExcludedMembers">
+            <EntityTypeMapping TypeName="XaviersModel.TaxExcludedMember">
+              <MappingFragment StoreEntitySet="TaxExcludedMember">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblColumns">
+            <EntityTypeMapping TypeName="XaviersModel.tblColumn">
+              <MappingFragment StoreEntitySet="tblColumns">
+                <ScalarProperty Name="ColumnId" ColumnName="ColumnId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="ColumnDispName" ColumnName="ColumnDispName" />
+                <ScalarProperty Name="DataType" ColumnName="DataType" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="XaviersModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkExperiences">
+            <EntityTypeMapping TypeName="XaviersModel.WorkExperience">
+              <MappingFragment StoreEntitySet="WorkExperience">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CompanyAndAddress" ColumnName="CompanyAndAddress" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="DOL" ColumnName="DOL" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecurringTaxes">
+            <EntityTypeMapping TypeName="XaviersModel.RecurringTax">
+              <MappingFragment StoreEntitySet="RecurringTax">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="LifetimeAmount" ColumnName="LifetimeAmount" />
+                <ScalarProperty Name="YearlyAmount" ColumnName="YearlyAmount" />
+                <ScalarProperty Name="MonthlyAmount" ColumnName="MonthlyAmount" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TaxName" ColumnName="TaxName" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecurringTaxCollections">
+            <EntityTypeMapping TypeName="XaviersModel.RecurringTaxCollection">
+              <MappingFragment StoreEntitySet="RecurringTaxCollection">
+                <ScalarProperty Name="TaxName" ColumnName="TaxName" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="ReceiverName" ColumnName="ReceiverName" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RecurringTaxId" ColumnName="RecurringTaxId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateContactName" FunctionName="XaviersModel.Store.UpdateContactName" />
+          <EntitySetMapping Name="AccountBalances">
+            <EntityTypeMapping TypeName="XaviersModel.AccountBalance">
+              <MappingFragment StoreEntitySet="AccountBalance">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ClosingBlance" ColumnName="ClosingBlance" />
+                <ScalarProperty Name="OpeningBalance" ColumnName="OpeningBalance" />
+                <ScalarProperty Name="FinanceYear" ColumnName="FinanceYear" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SmallSavingsCollections">
+            <EntityTypeMapping TypeName="XaviersModel.SmallSavingsCollection">
+              <MappingFragment StoreEntitySet="SmallSavingsCollection">
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="ReceiverName" ColumnName="ReceiverName" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SmallSavingsSettlements">
+            <EntityTypeMapping TypeName="XaviersModel.SmallSavingsSettlement">
+              <MappingFragment StoreEntitySet="SmallSavingsSettlement">
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="GivenId" ColumnName="GivenId" />
+                <ScalarProperty Name="GivenName" ColumnName="GivenName" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="XaviersModel.Loan">
+              <MappingFragment StoreEntitySet="Loan">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="InstalmentDueDay" ColumnName="InstalmentDueDay" />
+                <ScalarProperty Name="LateFee" ColumnName="LateFee" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="SanctionDate" ColumnName="SanctionDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="InstalmentPeriod" ColumnName="InstalmentPeriod" />
+                <ScalarProperty Name="LoanStatus" ColumnName="LoanStatus" />
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LoanType" ColumnName="LoanType" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanCollections">
+            <EntityTypeMapping TypeName="XaviersModel.LoanCollection">
+              <MappingFragment StoreEntitySet="LoanCollection">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ReceiverName" ColumnName="ReceiverName" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LateFee" ColumnName="LateFee" />
+                <ScalarProperty Name="Interest" ColumnName="Interest" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="LoanId" ColumnName="LoanId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

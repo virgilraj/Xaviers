@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Audit Report";
+}
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row" ng-controller="reportCtrl" ng-init="load(0, true)">
+    <div class="addedit">
+        <div class="larg-2 medium-2 hide-for-small-only columns">
+            &nbsp;
+            @*<div class="callout panel">
+                    Add Banner
+                </div>*@
+        </div>
+        <div class="larg-8 medium-8 columns">
+            <div class="row panel">
+                <div class="large-4 columns"><label class="align-right">Select Financial Year</label></div>
+                <div class="large-4 columns">
+                    <select id="year" ng-model="selYear" ng-change="getReport()">
+                        <option ng-repeat="yr in yearList">{{yr}}</option>
+                    </select>
+                </div>
+                <div class="large-4 columns">&nbsp;</div>
+            </div>
+            <fieldset>
+                <legend><b>Reports</b></legend>
+                <div class="panel">
+                    <table width="100%" border="0">
+                        <tr><td></td>
+                            <td><h4>Income</h4></td>
+                            <td><h4>Expense</h4></td>
+                        </tr>
+                        <tr class="row" ng-repeat="report in reports">
+                            <td><label><b>{{report.GroupName}}</b></label>
+                                <table width="100%" border="0">
+                                    <tr class="row" ng-repeat="income in report.IncomeExpense">
+                                        <td width="65%">&nbsp;{{income.Description}}</td>
+                                        <td>&nbsp;{{income.Income | currency:" ₹ ":2}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td><label><b>{{report.GroupName}}</b></label>
+                                <table width="100%" border="0">
+                                    <tr class="row" ng-repeat="expense in report.IncomeExpense">
+                                        <td width="65%">&nbsp;{{expense.Description}}</td>
+                                        <td>&nbsp;{{expense.Expense | currency:" ₹ ":2}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><h4>{{getIncomeTotal() | currency:" ₹ ":2}}</h4></td>
+                            <td><h4>{{getExpenseTotal() | currency:" ₹ ":2}}</h4></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+        <div class="larg-2 medium-2 hide-for-small-only columns">
+            &nbsp;
+            @*<div class="callout panel">
+                    Add Banner
+                </div>*@
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/ng-google-chart.js"></script>*@
+<script src="~/Scripts/reports.js"></script>
+

@@ -1,0 +1,62 @@
+﻿@model DatabaseDataModel.User
+@{
+    ViewBag.Title = "Log in";
+}
+<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="addedit">
+        <div class="larg-3 medium-3 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+        <div class="larg-6 medium-6 columns">
+            <fieldset>
+                <legend><b>Login</b></legend>
+                <div class="panel">
+                    @using (Html.BeginForm("Login", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="large-3 columns">&nbsp;</div>
+                            <div class="large-6 columns">@Html.ValidationSummary(true)</div>
+                            <div class="large-3 columns">&nbsp;</div>
+                        </div>
+                        <div class="row">
+                            <div class="large-3 columns">&nbsp;</div>
+                            <div class="large-6 columns">
+                                <label>Email</label>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", @maxlength = "70", @placeholder = "Enter email/user id", @required = "" })
+                            </div>
+                            <div class="large-3 columns">&nbsp;</div>
+                        </div>
+                        <div class="row">
+                            <div class="large-3 columns">&nbsp;</div>
+                            <div class="large-6 columns">
+                                <label>Password</label>
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password", @maxlength = "50", @placeholder = "Enter password", @required = "" })
+                            </div>
+                            <div class="large-3 columns">&nbsp;</div>
+                        </div>
+                        <div class="row">
+                            <div class="large-5 columns">&nbsp;</div>
+                            <div class="large-4 columns">
+                                <input id="Submit1" class="small button radius round" type="submit" value="Login" />
+                            </div>
+                            <div class="large-3 columns">&nbsp;</div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns"><a href="/Home/ForgotPassword">Forgot password?</a></div>
+                        </div>
+                    }
+                </div>
+            </fieldset>
+        </div>
+        <div class="larg-3 medium-3 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+    </div>
+</div>
+
