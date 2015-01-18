@@ -53,9 +53,14 @@ function customerCtrl($scope, repository, $http, fileUpload, utilityService, $lo
         if (!myForm.$valid) { alert("Please enter valid inputs"); return false; }
         if ($scope.Customer.CurrentFinanceyear < $scope.Customer.StartFinaceYer)
         {
-
             alert("Current financial year should not be less than starting financial year. Please enter valid current financial year.");
             return false;
+        }
+        if (angular.isDefined($scope.myFile) && angular.isObject($scope.myFile)) {
+            if (!(/\.(gif|jpg|jpeg|tiff|png)$/i).test($scope.myFile.name)) {
+                alert('Invalid image type. Please select valid image types like gif, jpg, jpeg, tiff or png.');
+                return false;
+            }
         }
         $scope.Customer.HasLogo = angular.isDefined($scope.myFile) && angular.isObject($scope.myFile) ? true : false;
         $scope.isUpdate = false;
@@ -81,6 +86,12 @@ function customerCtrl($scope, repository, $http, fileUpload, utilityService, $lo
 
     $scope.update = function (myForm) {
         if (!myForm.$valid) { alert("Please enter valid inputs"); return false; }
+        if (angular.isDefined($scope.myFile) && angular.isObject($scope.myFile)) {
+            if (!(/\.(gif|jpg|jpeg|tiff|png)$/i).test($scope.myFile.name)) {
+                alert('Invalid image type. Please select valid image types like gif, jpg, jpeg, tiff or png.');
+                return false;
+            }
+        }
         if ($scope.Customer != null && angular.isDefined($scope.Customer.Id) && $scope.Customer.Id > 0) {
             var updateurl = url + '/' + $scope.Customer.Id;
             repository.update(function () {

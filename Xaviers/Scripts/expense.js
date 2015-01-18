@@ -111,6 +111,12 @@ function expenseCtrl($scope, repository, $http, utilityService, fileUpload) {
     $scope.save = function (myForm, isApprove) {
         $scope.Expense.HasImage = angular.isDefined($scope.myFile) && angular.isObject($scope.myFile) ? true : false;
         if (!myForm.$valid) { alert("Please enter valid inputs"); return false; }
+        if (angular.isDefined($scope.myFile) && angular.isObject($scope.myFile)) {
+            if (!(/\.(gif|jpg|jpeg|tiff|png)$/i).test($scope.myFile.name)) {
+                alert('Invalid image type. Please select valid image types like gif, jpg, jpeg, tiff or png.');
+                return false;
+            }
+        }
         setPayerDetails($scope);
         if ($scope.Expense.ContactName != null && angular.isDefined($scope.Expense.ContactName) && $scope.Expense.ContactName != '' && (angular.isUndefined($scope.Expense.ContactId) || $scope.Expense.ContactId == '')) {
             alert("Please select name from dropdown"); return false;
@@ -135,6 +141,12 @@ function expenseCtrl($scope, repository, $http, utilityService, fileUpload) {
     $scope.update = function (myForm, isApprove) {
         $scope.Expense.HasImage = $scope.Expense.HasImage || angular.isDefined($scope.myFile) && angular.isObject($scope.myFile) ? true : false;
         if (!myForm.$valid) { alert("Please enter valid inputs"); return false; }
+        if (angular.isDefined($scope.myFile) && angular.isObject($scope.myFile)) {
+            if (!(/\.(gif|jpg|jpeg|tiff|png)$/i).test($scope.myFile.name)) {
+                alert('Invalid image type. Please select valid image types like gif, jpg, jpeg, tiff or png.');
+                return false;
+            }
+        }
         setPayerDetails($scope);
         if ($scope.Expense.ContactName != null && angular.isDefined($scope.Expense.ContactName) && $scope.Expense.ContactName != '' && (angular.isUndefined($scope.Expense.ContactId) || $scope.Expense.ContactId == '')) {
             alert("Please select name from dropdown"); return false;

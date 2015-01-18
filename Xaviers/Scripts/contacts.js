@@ -179,6 +179,12 @@ function contactCtrl($scope, repository, $http, fileUpload, utilityService, $win
     $scope.save = function (myForm) {
         $scope.Contact.HasImage = angular.isDefined($scope.myFile) && angular.isObject($scope.myFile) ? true : false;
         if (!myForm.$valid) { alert("Please enter valid inputs"); return false; }
+        if (angular.isDefined($scope.myFile) && angular.isObject($scope.myFile)) {
+            if (!(/\.(gif|jpg|jpeg|tiff|png)$/i).test($scope.myFile.name)) {
+                alert('Invalid image type. Please select valid image types like gif, jpg, jpeg, tiff or png.');
+                return false;
+            }
+        }
         $scope.isUpdate = false;
         setSpouseandParent($scope);
         formatDateString($scope, utilityService);
@@ -201,6 +207,12 @@ function contactCtrl($scope, repository, $http, fileUpload, utilityService, $win
     $scope.update = function (myForm) {
         $scope.Contact.HasImage = $scope.Contact.HasImage || angular.isDefined($scope.myFile) && angular.isObject($scope.myFile) ? true : false;
         if (!myForm.$valid) { alert("Please enter valid inputs"); return false; }
+        if (angular.isDefined($scope.myFile) && angular.isObject($scope.myFile)) {
+            if (!(/\.(gif|jpg|jpeg|tiff|png)$/i).test($scope.myFile.name)) {
+                alert('Invalid image type. Please select valid image types like gif, jpg, jpeg, tiff or png.');
+                return false;
+            }
+        }
         if ($scope.Contact != null && angular.isDefined($scope.Contact.ContactId) && $scope.Contact.ContactId > 0) {
             var updateurl = url + '/' + $scope.Contact.ContactId;
             setSpouseandParent($scope);
