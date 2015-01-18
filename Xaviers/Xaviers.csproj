@@ -226,6 +226,7 @@
     <Compile Include="Controllers\Odata\OdataIncomeExpenseGroupController.cs" />
     <Compile Include="Controllers\Odata\OdataLoanCollectionController.cs" />
     <Compile Include="Controllers\Odata\OdataLoanController.cs" />
+    <Compile Include="Controllers\Odata\OdataMailGroupController.cs" />
     <Compile Include="Controllers\Odata\OdataRecurringTaxCollectionController.cs" />
     <Compile Include="Controllers\Odata\OdataRecurringTaxController.cs" />
     <Compile Include="Controllers\Odata\OdataSavingReturnController.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="Controllers\WebApi\IncomeExpenseGroupController.cs" />
     <Compile Include="Controllers\WebApi\LoanCollectionController.cs" />
     <Compile Include="Controllers\WebApi\LoanController.cs" />
+    <Compile Include="Controllers\WebApi\MailGroupController.cs" />
     <Compile Include="Controllers\WebApi\RecurringTaxCollectionController.cs" />
     <Compile Include="Controllers\WebApi\RecurringTaxController.cs" />
     <Compile Include="Controllers\WebApi\ReportController.cs" />
@@ -307,6 +309,9 @@
     <Content Include="Scripts\recurring.js" />
     <Content Include="Scripts\recurringtaxcollection.js" />
     <Content Include="Scripts\reports.js" />
+    <Content Include="Scripts\TextAngular\textAngular-sanitize.js" />
+    <Content Include="Scripts\TextAngular\textAngular.js" />
+    <Content Include="Scripts\TextAngular\textAngularSetup.js" />
     <Content Include="Scripts\user.js" />
     <Content Include="Scripts\taxcollection.js" />
     <Content Include="Scripts\tax.js" />

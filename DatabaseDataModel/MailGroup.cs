@@ -12,29 +12,21 @@ namespace DatabaseDataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class RecurringTax
+    public partial class MailGroup
     {
-        public RecurringTax()
+        public MailGroup()
         {
-            this.RecurringTaxCollections = new HashSet<RecurringTaxCollection>();
+            this.MailContacts = new HashSet<MailContact>();
         }
     
         public int Id { get; set; }
         public Nullable<int> CustomerId { get; set; }
-        public string TaxName { get; set; }
-        public string Description { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<double> MonthlyAmount { get; set; }
-        public Nullable<double> YearlyAmount { get; set; }
-        public Nullable<double> LifetimeAmount { get; set; }
-        public Nullable<bool> IsApprove { get; set; }
+        public string GroupName { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> ModifyBy { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
-        public bool IsNameChanged { get; set; }
-
-        public virtual ICollection<RecurringTaxCollection> RecurringTaxCollections { get; set; }
+    
+        public virtual ICollection<MailContact> MailContacts { get; set; }
     }
 }

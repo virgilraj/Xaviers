@@ -71,7 +71,7 @@ namespace DatabaseDataModel
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.DateTime> DOL { get; set; }
         public bool IsNameChanged { get; set; }
-    
+
         public virtual ICollection<Qualification> Qualifications { get; set; }
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<WorkExperience> WorkExperiences { get; set; }

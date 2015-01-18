@@ -46,6 +46,8 @@ namespace DatabaseDataModel
         public virtual DbSet<SmallSavingsSettlement> SmallSavingsSettlements { get; set; }
         public virtual DbSet<Loan> Loans { get; set; }
         public virtual DbSet<LoanCollection> LoanCollections { get; set; }
+        public virtual DbSet<MailContact> MailContacts { get; set; }
+        public virtual DbSet<MailGroup> MailGroups { get; set; }
     
         public virtual int UpdateContactName(Nullable<int> contactId, Nullable<int> customerId, string contactName)
         {

@@ -198,6 +198,27 @@
           <Property Name="ModifyBy" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="MailContacts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MailGroupId" Type="int" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="MailGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="75" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Qualification">
           <Key>
             <PropertyRef Name="Id" />
@@ -408,6 +429,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MailContacts_MailGroup">
+          <End Role="MailGroup" Type="Self.MailGroup" Multiplicity="0..1" />
+          <End Role="MailContacts" Type="Self.MailContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MailGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MailContacts">
+              <PropertyRef Name="MailGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Qualification_Contact">
           <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
           <End Role="Qualification" Type="Self.Qualification" Multiplicity="*" />
@@ -494,6 +527,8 @@
           <EntitySet Name="IncomeExpenseGroup" EntityType="Self.IncomeExpenseGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Loan" EntityType="Self.Loan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanCollection" EntityType="Self.LoanCollection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MailContacts" EntityType="Self.MailContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MailGroup" EntityType="Self.MailGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Qualification" EntityType="Self.Qualification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecurringTax" EntityType="Self.RecurringTax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecurringTaxCollection" EntityType="Self.RecurringTaxCollection" Schema="dbo" store:Type="Tables" />
@@ -508,6 +543,10 @@
           <AssociationSet Name="FK_LoanCollection_Loan" Association="Self.FK_LoanCollection_Loan">
             <End Role="Loan" EntitySet="Loan" />
             <End Role="LoanCollection" EntitySet="LoanCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailContacts_MailGroup" Association="Self.FK_MailContacts_MailGroup">
+            <End Role="MailGroup" EntitySet="MailGroup" />
+            <End Role="MailContacts" EntitySet="MailContacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Qualification_Contact" Association="Self.FK_Qualification_Contact">
             <End Role="Contact" EntitySet="Contact" />
@@ -908,6 +947,12 @@
             <End Role="Loan" EntitySet="Loans" />
             <End Role="LoanCollection" EntitySet="LoanCollections" />
           </AssociationSet>
+          <EntitySet Name="MailContacts" EntityType="XaviersModel.MailContact" />
+          <EntitySet Name="MailGroups" EntityType="XaviersModel.MailGroup" />
+          <AssociationSet Name="FK_MailContacts_MailGroup" Association="XaviersModel.FK_MailContacts_MailGroup">
+            <End Role="MailGroup" EntitySet="MailGroups" />
+            <End Role="MailContact" EntitySet="MailContacts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="RecurringTax">
           <Key>
@@ -1071,6 +1116,40 @@
             </Principal>
             <Dependent Role="LoanCollection">
               <PropertyRef Name="LoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MailContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MailGroupId" Type="Int32" />
+          <Property Name="ContactId" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MailGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="GroupName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MailContacts" Relationship="XaviersModel.FK_MailContacts_MailGroup" FromRole="MailGroup" ToRole="MailContact" />
+        </EntityType>
+        <Association Name="FK_MailContacts_MailGroup">
+          <End Type="XaviersModel.MailGroup" Role="MailGroup" Multiplicity="0..1" />
+          <End Type="XaviersModel.MailContact" Role="MailContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MailGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MailContact">
+              <PropertyRef Name="MailGroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1487,6 +1566,29 @@
                 <ScalarProperty Name="ContactId" ColumnName="ContactId" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="LoanId" ColumnName="LoanId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MailContacts">
+            <EntityTypeMapping TypeName="XaviersModel.MailContact">
+              <MappingFragment StoreEntitySet="MailContacts">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="MailGroupId" ColumnName="MailGroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MailGroups">
+            <EntityTypeMapping TypeName="XaviersModel.MailGroup">
+              <MappingFragment StoreEntitySet="MailGroup">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -91,6 +91,12 @@
     <Compile Include="LoanCollection.cs">
       <DependentUpon>XaviersData.tt</DependentUpon>
     </Compile>
+    <Compile Include="MailContact.cs">
+      <DependentUpon>XaviersData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MailGroup.cs">
+      <DependentUpon>XaviersData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Qualification.cs">
       <DependentUpon>XaviersData.tt</DependentUpon>
