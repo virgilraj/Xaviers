@@ -46,6 +46,11 @@ app.factory('repository', function ($http) {
         }
         ,
 
+        getOdat: function (callback, urls, responsecallback) {
+            $http.get(urls).success(callback).then(responsecallback);
+        }
+        ,
+
         //method for insert
         insert: function (callback, contact, responsecallback) {
             $http.post(url, contact).success(callback).then(responsecallback);

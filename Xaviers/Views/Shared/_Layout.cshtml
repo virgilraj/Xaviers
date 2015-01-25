@@ -5,7 +5,7 @@
     @*Set the viewport width to device width for mobile *@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>@ViewBag.Title - alancypugal.com</title>
+    <title>@ViewBag.Title - pugal.in</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     @Styles.Render("~/Content/foundation/css")
@@ -76,7 +76,14 @@ else
 }
 else {
                 <ul class="right">
-                        <li><a href="/Contact">Contacts Manangement</a></li>
+                    <li class="has-dropdown">
+                        <a href="/Contact">Contacts Manangement</a>
+                        <ul class="dropdown">
+                            <li><a href="/Contact">Contacts</a></li>
+                            <li><a href="/MailGroup">Mail Group</a></li>
+                            <li><a href="/MailGroup/MailCampaign">Mail Campaign</a></li>
+                        </ul>
+                    </li>
                         <li class="divider"></li>
                         <li class="has-dropdown">
                             <a href="/Tax">Tax Manangement</a>

@@ -18,5 +18,6 @@ namespace DatabaseDataModel
         public Nullable<int> MailGroupId { get; set; }
         public Nullable<int> ContactId { get; set; }
         public string Email { get; set; }
+        public string ContactName { get; set; }
     }
 }

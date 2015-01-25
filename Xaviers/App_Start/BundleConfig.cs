@@ -26,6 +26,9 @@ namespace Xaviers
                     "~/Scripts/angular.js",
                     "~/Scripts/angular-resource.js",
                     "~/Scripts/angular-cookies.js",
+                    "~/Scripts/angular-wysiwyg.js",
+                   // "~/Scripts/TextAngular/textAngular.js",
+                    //"~/Scripts/TextAngular/textAngularSetup.js",
                     "~/Scripts/utility.js"));
 
             bundles.Add(new StyleBundle("~/Content/AppStyles").Include(

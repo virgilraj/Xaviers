@@ -29,6 +29,7 @@ namespace BusinessLayer
             adminControllers.Add("customer-changepasswordsuccess");
             adminControllers.Add("smallsavings");
             adminControllers.Add("loan");
+            adminControllers.Add("mailgroup");
 
             List<string> userControllers = new List<string>();
             userControllers.Add("contact");
@@ -50,6 +51,7 @@ namespace BusinessLayer
             superAdminControllers.Add("customer-updatecustomer");
             superAdminControllers.Add("smallsavings");
             superAdminControllers.Add("loan");
+            superAdminControllers.Add("mailgroup");
 
             roleControllers.Add(new RoleAndController
             {

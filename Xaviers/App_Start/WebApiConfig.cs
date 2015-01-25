@@ -38,6 +38,7 @@ namespace Xaviers
             builder.EntitySet<Loan>("OdataLoan");
             builder.EntitySet<LoanCollection>("OdataLoanCollection");
             builder.EntitySet<MailGroup>("OdataMailGroup");
+            builder.EntitySet<MailContact>("MailContacts");
 
             builder.Namespace = "OdataServices";
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());

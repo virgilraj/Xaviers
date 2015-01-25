@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DatabaseDataModel;
+using RepositoryAndUnitOfWork.Interfaces;
 using RepositroryAndUnitOfWork.Implementations;
 using RepositroryAndUnitOfWork.Interfaces;
 using System;
@@ -28,9 +29,23 @@ namespace Xaviers.Controllers.WebApi
             mailcontactRepository = unitOfWork.GetRepository<MailContact>();
         }
         // GET: api/MailGroup
-        public IEnumerable<MailGroup> Get()
+        //public IEnumerable<MailGroup> Get()
+        //{
+        //    return mailgroupRepository.GetAll();
+        //}
+
+        [System.Web.Http.AcceptVerbs("GET")]
+        [System.Web.Http.HttpGet]
+        [Route("api/MailGroup/{keyword}")]
+        public IEnumerable<MailGroup> GetTax(string keyword)
         {
-            return mailgroupRepository.GetAll();
+            if (auth.LoggedinUser == null)
+            {
+                return null;
+            }
+
+            Expression<Func<MailGroup, bool>> expr = group => group.CustomerId == auth.LoggedinUser.CustomerId && group.GroupName.ToLower().StartsWith(keyword.ToLower()); ;
+            return mailgroupRepository.GetAll(expr);
         }
 
         // GET: api/MailGroup/5
@@ -161,14 +176,11 @@ namespace Xaviers.Controllers.WebApi
             {
                 return this.Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-            //ValidateUsage valUsage = new ValidateUsage(null, null, null, null, null, null,
-            //    null, null, null, null, collectionRepository);
-            //if (valUsage.IsTaxAlreadyUsed(id))
-            //{
-            //    return this.Request.CreateResponse(HttpStatusCode.OK, new { content = "USED" });
-            //}
             try
             {
+                //Remove all contacts first
+                DeleteMailContacts(id);
+
                 MailGroup mailgroup = mailgroupRepository.Single(id);
                 mailgroupRepository.Delete(mailgroup);
                 unitOfWork.Save();

@@ -206,6 +206,7 @@
           <Property Name="MailGroupId" Type="int" />
           <Property Name="ContactId" Type="int" />
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="MailGroup">
           <Key>
@@ -1127,6 +1128,7 @@
           <Property Name="MailGroupId" Type="Int32" />
           <Property Name="ContactId" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MailGroup">
           <Key>
@@ -1573,6 +1575,7 @@
           <EntitySetMapping Name="MailContacts">
             <EntityTypeMapping TypeName="XaviersModel.MailContact">
               <MappingFragment StoreEntitySet="MailContacts">
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ContactId" ColumnName="ContactId" />
                 <ScalarProperty Name="MailGroupId" ColumnName="MailGroupId" />

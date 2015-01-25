@@ -143,4 +143,12 @@ namespace BusinessLayer
         public double PrevValue1 { get; set; }
         public double PrevValue2 { get; set; }
     }
+
+    public class MailCampaign
+    {
+        public string Emails { get; set; }
+        public int MailGroupId { get; set; }
+        public string Subject { get; set; }
+        public string Campaign { get; set; }
+    }
 }

@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "Mail Group";
+}
+<div class="row">
+    &nbsp;
+</div>
+
+
+<div class="row" ng-controller="mailCtrl" ng-init="load(0)">
+    <div class="addedit" ng-show="!isList">
+        <div class="larg-2 medium-2 hide-for-small-only columns">
+            &nbsp;
+            @*<div class="callout panel">
+                    Add Banner
+                </div>*@
+        </div>
+        <div class="larg-8 medium-8 columns">
+            <fieldset>
+                <legend><b>Mail Group</b></legend>
+                <div class="row">
+                    <div class="large-12 medium-12 columns">
+                        <div class="larg-2 medium-2 columns tiny button radius align-right" ng-click="showMailGroup();">Mail Groups</div>
+                    </div>
+                </div>
+                <div class="panel">
+
+                    <form name="myForm">
+                        <div class="row">
+                            <div class="large-12 columns"><label>Mail Group Name</label><input type="text" ng-disabled="isView" required placeholder="Enter mail group name" ng-model="MailGroup.GroupName" id="MailGroup" maxlength="50" /> </div>
+                        </div>
+                        <fieldset>
+                            <legend>Add Contacts:</legend>
+
+                            <div class="row">
+                                <div class="columns large-4">
+                                    <div class="row">
+                                        <div class="columns large-12">
+                                            <input type="text" ng-change="changeName()" ng-disabled="isView" ng-model="Excluded.payerDetail" placeholder="Enter name" typeahead="contact as contact.Name for contact in getAll($viewValue) | filter:$viewValue" class="form-control" maxlength="150" ng-pattern="/[a-zA-Z]+/">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-12 medium-12 columns" style="float:left">
+                                            <div>
+                                                <a href="javascript:void(0)" ng-disabled="isView" class="tiny radius button" ng-click="addContacts();"><label>Add Contacts</label> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="columns large-8">
+                                    <div class="row hide-for-small-only">
+                                        <div class="columns large-1"><label><b>Id</b></label></div>
+                                        <div class="columns large-4"><label><b>Name</b></label></div>
+                                        <div class="columns large-4"><label><b>Email</b></label></div>
+                                    </div>
+                                    <div class="row panel" ng-class-odd="'grid-row'" ng-class-even="'grid-row-alternate'" ng-repeat="contact in MailContacts">
+                                        <div class="columns large-1"><label>{{contact.ContactId}}</label></div>
+                                        <div class="columns large-4"><label>{{contact.ContactName}}</label></div>
+                                        <div class="columns large-4"><label>{{contact.Email}}</label></div>
+                                        <div class="columns large-1">
+                                            <a href="javascript:void(0)" ng-click="deleteContacts(contact.ContactId)"><div class="delete"></div></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row"><i class="small-font">* Red and green highlighted fields are mandatory</i></div>
+                        <div class="row">
+                            <div class="large-3 columns">&nbsp; </div>
+                            <div class="large-6 columns align-center">
+                                <div ng-hide="true" id="Id" ng-model="MailGroup.Id"></div>
+                                <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-click="reset()" type="button" value="Reset" />
+                                <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-hide="!isUpdate" ng-show="isUpdate" ng-click="update(myForm, false)" type="button" value="Update" />
+                                <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-hide="isUpdate" ng-show="!isUpdate" ng-click="save(myForm, false)" type="submit" value="Save" />
+                            </div>
+                            <div class="large-3 columns">&nbsp; </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <div class="larg-2 medium-2 hide-for-small-only columns">
+            &nbsp;
+            @*<div class="callout panel">
+                    Add Banner
+                </div>*@
+        </div>
+    </div>
+    <div class="list" ng-show="isList">
+        <div class="larg-12 medium-12 columns ">
+            <fieldset>
+                <legend>Mail Groups</legend>
+                <div class="row">
+                    <div class="large-12 medium-12 columns" style="float:left">
+                        <div>
+                            <a href="#" class="tiny radius button" pdf ng-click="exportToPdf();"><label>Export to PDF</label> </a>
+                            <a href="#" class="tiny radius button" ng-click="addMailGroup();"><label>Add Mail group</label> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row panel">
+                    <div class="large-1 medium-1 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button split align-left"><label>ID</label> </a>
+                    </div>
+                    <div class="large-9 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button split"><label>Mail group Name</label> <span class="namefilter" data-dropdown="drop"></span></a>
+                        <ul id="drop" class="f-dropdown" data-dropdown-content>
+                            <li>
+                                <div class="row">
+                                    <div class="columns"><input type="text" placeholder="Mail group name" id="nameFilterText" ng-model="nameFilter.Text" /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns">
+                                        <select class="tiny secondary" id="nameFilterOptions" ng-model="nameFilter.Options">
+                                            <option ng-repeat="lst in searchoptions" value="{{lst.value}}" ng-selected="singleSearchDefault === lst.text">{{lst.text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns large-6 align-searchfilter">
+                                        <div class="search" ng-click="filter()"></div>
+
+                                    </div>
+                                    <div class="columns large-6">
+                                        <div class="delete" ng-click="clearNamefilter()"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="large-2 medium-2 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary button "><label>Action</label> </a>
+                    </div>
+
+                    <div id="grid" class="row" ng-class-odd="'grid-row'" ng-class-even="'grid-row-alternate'" ng-repeat="group in mailgroups">
+                        <div class="small-12 columns show-for-small-only">
+                            <div class="row">
+                                <div class="columns small-12">
+                                    <label><b>Id: </b> &nbsp;{{group.Id}}</label>
+                                    <label><b>Name: </b> &nbsp;{{group.GroupName}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="large-1 columns hide-for-small-only"><label style="padding-left:20px">{{group.Id}}</label></div>
+                        <div class="large-9 columns hide-for-small-only"><label>&nbsp;{{group.GroupName}}</label></div>
+                        <div class="large-2 medium-2 columns">
+                            <a title="View" pdf ng-click="view(group.Id);"><div class="view"></div> </a>
+                            <div class="spacer">&nbsp;</div>
+                            <a title="Edit" href="javascript:void(0)" ng-hide="!IsSA " ng-click="edit(group.Id)"><div class="edit"></div></a>
+                            <div class="spacer">&nbsp;</div>
+                            <a title="Delete" href="javascript:void(0)" ng-hide="!IsSA" ng-click="delete(group.Id)"><div class="delete"></div></a>
+                            <div class="spacer">&nbsp;</div>
+                            <a title="View PDF" pdf ng-click="exportToPdfSingle(group.Id);"><div class="view-pdf"></div> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <pagination boundary-links="true" total-items="totalItems" items-per-page="25" page="currentPage" max-size="maxSize" ng-model="aaa" on-select-page="pageChange(page)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                </div>
+
+            </fieldset>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/mail.js"></script>
