@@ -134,5 +134,14 @@ namespace Xaviers.Controllers
             return Ok(contact);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }

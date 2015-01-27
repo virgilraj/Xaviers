@@ -178,5 +178,14 @@ namespace Xaviers.Controllers.WebApi
 
             return Ok(recurringtaxcollection);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

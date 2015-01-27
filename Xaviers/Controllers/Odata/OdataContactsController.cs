@@ -184,5 +184,15 @@ namespace Xaviers.Controllers.Odata
         //{
         //    return db.Contacts.Count(e => e.ContactId == key) > 0;
         //}
+
+        protected override void Dispose(bool disposing)
+        {
+            //if (disposing)
+            //{
+            //    unitOfWork.Dispose();
+            //}
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

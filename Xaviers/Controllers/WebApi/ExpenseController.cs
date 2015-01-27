@@ -158,5 +158,14 @@ namespace Xaviers.Controllers.WebApi
                 unitOfWork.Save();
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

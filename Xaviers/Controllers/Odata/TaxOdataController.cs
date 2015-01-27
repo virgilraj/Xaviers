@@ -225,5 +225,14 @@ namespace Xaviers.Controllers.Odata
         //{
         //    return db.Taxes.Count(e => e.Id == key) > 0;
         //}
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

@@ -227,5 +227,14 @@ namespace Xaviers.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

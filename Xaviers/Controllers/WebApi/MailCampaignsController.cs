@@ -68,5 +68,14 @@ namespace Xaviers.Controllers.WebApi
 
             return CreatedAtRoute("DefaultApi", new { id = mail.Emails }, mail);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

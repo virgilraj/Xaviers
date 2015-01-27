@@ -215,5 +215,13 @@ namespace Xaviers.Controllers.WebApi
             return taxBalance;
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

@@ -44,5 +44,14 @@ namespace Xaviers.Controllers.Odata
                 return null;
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

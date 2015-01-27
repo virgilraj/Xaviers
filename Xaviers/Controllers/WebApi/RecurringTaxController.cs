@@ -235,5 +235,14 @@ namespace Xaviers.Controllers.WebApi
 
             return this.Request.CreateResponse(HttpStatusCode.NoContent);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

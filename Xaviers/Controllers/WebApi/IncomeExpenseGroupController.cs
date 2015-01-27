@@ -78,5 +78,14 @@ namespace Xaviers.Controllers.WebApi
 
             return group;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

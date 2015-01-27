@@ -425,5 +425,15 @@ namespace Xaviers.Controllers
             }
             return this.Request.CreateResponse(HttpStatusCode.NoContent);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            //if (disposing)
+            //{vcx
+            //    unitOfWork.Dispose();
+            //}
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
