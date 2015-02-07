@@ -1,6 +1,6 @@
 ﻿var url = '/api/Contacts';
-var odaturl = '/odata/OdataContacts?$select=ContactId,CustomerId,Title,FirstName,LastName,Address1,Address2,City,YearIncome,IsEligibleForTax,IsMember,PhoneNumber,DOB,Email,HasImage&$orderby=ContactId desc';
-var pdfUrl = '/odata/OdataContacts?$select=ContactId,CustomerId,Title,FirstName,LastName,Address1,Address2,City,PhoneNumber,YearIncome,IsEligibleForTax,IsMember,DOB,Email,SpouseName,BaptismDate,Eucharist,Reconciliation,Confirmation,Marriage,HolyOrders,AnointingoftheSick,FatherName,MotherName,HasImage';
+var odaturl = '/odata/OdataContacts?$select=ContactId,CustomerId,Title,FirstName,LastName,Address1,Address2,City,YearIncome,MobileNumber,IsEligibleForTax,IsMember,PhoneNumber,DOB,Email,HasImage&$orderby=ContactId desc';
+var pdfUrl = '/odata/OdataContacts?$select=ContactId,CustomerId,Title,FirstName,LastName,Address1,Address2,City,PhoneNumber,MobileNumber,YearIncome,IsEligibleForTax,IsMember,DOB,Email,SpouseName,BaptismDate,Eucharist,Reconciliation,Confirmation,Marriage,HolyOrders,AnointingoftheSick,FatherName,MotherName,HasImage';
 var typeaheadurl = "/odata/OdataContacts?$select=ContactId,Title,FirstName,LastName";
 var loanurl ='/api/Loan'
 
@@ -51,6 +51,10 @@ function contactCtrl($scope, repository, $http, fileUpload, utilityService, $win
         }
         $scope.myFile = null;
         $scope.OldName = '';
+        $scope.spouseDetail = null;
+        $scope.fatherDetail = null;
+        $scope.motherDetail = null;
+        $scope.guardianDetail = null;
     }
     $scope.showContact = function () {
         $scope.isUpdate = false;
@@ -70,11 +74,18 @@ function contactCtrl($scope, repository, $http, fileUpload, utilityService, $win
             $scope.lNme = 'Proprietor / Contact Name';
             $scope.isCompany = true;
         }
+        else if (angular.isDefined($scope.Contact) && angular.isDefined($scope.Contact.Title) && ($scope.Contact.Title == 'Mrs' || $scope.Contact.Title == 'Miss')) {
+            $scope.Gender = 'Female';
+        }
+        else
+        {
+            $scope.Gender = 'Male';
+        }
     }
 
     $scope.load = function (pageno) {
         var skipnum = parseInt($scope.itemsPerPage) * parseInt(pageno - 1);
-        var loadurl = odaturl + "&$skip=" + skipnum + "&$top=" + $scope.itemsPerPage + "&$inlinecount=allpages";
+        var loadurl = odaturl + $scope.filterCondition + "&$skip=" + skipnum + "&$top=" + $scope.itemsPerPage + "&$inlinecount=allpages";
         repository.get(function (results) {
             if (!angular.isObject(results.value)) {
                 $window.location.reload();
@@ -293,7 +304,7 @@ function contactCtrl($scope, repository, $http, fileUpload, utilityService, $win
                 else if ($scope.Filter.Other == 'Tax payer') {
                     other = "(IsEligibleForTax eq true)"
                 }
-                else if ($scope.Filter.Other == 'Female') {
+                else if ($scope.Filter.Other == 'Company') {
                     other = "(Title eq 'Company')"
                 }
             }

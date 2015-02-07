@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Mail Group";
+    ViewBag.Title = "Group";
 }
 <div class="row">
     &nbsp;
@@ -16,17 +16,17 @@
         </div>
         <div class="larg-8 medium-8 columns">
             <fieldset>
-                <legend><b>Mail Group</b></legend>
+                <legend><b>Group</b></legend>
                 <div class="row">
                     <div class="large-12 medium-12 columns">
-                        <div class="larg-2 medium-2 columns tiny button radius align-right" ng-click="showMailGroup();">Mail Groups</div>
+                        <div class="larg-2 medium-2 columns tiny button radius align-right" ng-click="showMailGroup();">Groups</div>
                     </div>
                 </div>
                 <div class="panel">
 
                     <form name="myForm">
                         <div class="row">
-                            <div class="large-12 columns"><label>Mail Group Name</label><input type="text" ng-disabled="isView" required placeholder="Enter mail group name" ng-model="MailGroup.GroupName" id="MailGroup" maxlength="50" /> </div>
+                            <div class="large-12 columns"><label>Group Name</label><input type="text" ng-disabled="isView" required placeholder="Enter group name" ng-model="MailGroup.GroupName" id="MailGroup" maxlength="50" /> </div>
                         </div>
                         <fieldset>
                             <legend>Add Contacts:</legend>
@@ -88,12 +88,12 @@
     <div class="list" ng-show="isList">
         <div class="larg-12 medium-12 columns ">
             <fieldset>
-                <legend>Mail Groups</legend>
+                <legend>Groups</legend>
                 <div class="row">
                     <div class="large-12 medium-12 columns" style="float:left">
                         <div>
                             <a href="#" class="tiny radius button" pdf ng-click="exportToPdf();"><label>Export to PDF</label> </a>
-                            <a href="#" class="tiny radius button" ng-click="addMailGroup();"><label>Add Mail group</label> </a>
+                            <a href="#" class="tiny radius button" ng-click="addMailGroup();"><label>Add group</label> </a>
                         </div>
                     </div>
                 </div>
@@ -102,11 +102,11 @@
                         <a href="#" class="tiny secondary radius button split align-left"><label>ID</label> </a>
                     </div>
                     <div class="large-9 columns hide-for-small-only">
-                        <a href="#" class="tiny secondary radius button split"><label>Mail group Name</label> <span class="namefilter" data-dropdown="drop"></span></a>
+                        <a href="#" class="tiny secondary radius button split"><label>Group Name</label> <span class="namefilter" data-dropdown="drop"></span></a>
                         <ul id="drop" class="f-dropdown" data-dropdown-content>
                             <li>
                                 <div class="row">
-                                    <div class="columns"><input type="text" placeholder="Mail group name" id="nameFilterText" ng-model="nameFilter.Text" /></div>
+                                    <div class="columns"><input type="text" placeholder="Group name" id="nameFilterText" ng-model="nameFilter.Text" /></div>
                                 </div>
                                 <div class="row">
                                     <div class="columns">

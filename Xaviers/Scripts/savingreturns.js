@@ -46,7 +46,7 @@ function savingreturnCtrl($scope, repository, $http, utilityService) {
 
     $scope.load = function (pageno) {
         var skipnum = parseInt($scope.itemsPerPage) * parseInt(pageno - 1);
-        var loadurl = odaturl + "&$skip=" + skipnum + "&$top=" + $scope.itemsPerPage + "&$inlinecount=allpages";
+        var loadurl = odaturl + $scope.filterCondition + "&$skip=" + skipnum + "&$top=" + $scope.itemsPerPage + "&$inlinecount=allpages";
         repository.get(function (results) {
             if (!angular.isObject(results.value)) {
                 $window.location.reload();

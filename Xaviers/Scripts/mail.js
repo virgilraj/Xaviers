@@ -1,5 +1,5 @@
 ﻿var url = '/api/MailGroup';
-var odaturl = '/odata/OdataMailGroup?&$filter=startswith(GroupName,\'plcholder\')';
+var odaturl = '/odata/OdataMailGroup?';
 var typeaheadurl = "/api/Contacts";
 var pdfUrl = "/odata/OdataMailGroup?$expand=MailContacts"
 function mailCtrl($scope, repository, $http, utilityService) {
@@ -115,7 +115,7 @@ function mailCtrl($scope, repository, $http, utilityService) {
     
     $scope.load = function (pageno) {
         var skipnum = parseInt($scope.itemsPerPage) * parseInt(pageno - 1);
-        var loadurl = odaturl + "&$skip=" + skipnum + "&$top=" + $scope.itemsPerPage + "&$inlinecount=allpages";
+        var loadurl = odaturl + $scope.filterCondition + "&$skip=" + skipnum + "&$top=" + $scope.itemsPerPage + "&$inlinecount=allpages";
         repository.get(function (results) {
             if (!angular.isObject(results.value)) {
                 $window.location.reload();
@@ -269,8 +269,11 @@ function mailCtrl($scope, repository, $http, utilityService) {
         return repository.getTypeAhead(loadurl);
     };
     $scope.getAll = function (val) {
-        var geturl = odaturl.replace(/\plcholder/g, val);
-        return repository.getWebApi(geturl);
+        var loadurl = typeaheadurl + '/' + val + '/all';
+        return repository.getWebApi(loadurl);
+
+        //var geturl = typeaheadurl.replace(/\plcholder/g, val);
+        //return repository.getWebApi(geturl);
     };
 
     $scope.exportToPdf = function () {

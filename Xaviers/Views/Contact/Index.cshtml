@@ -47,7 +47,7 @@
                                 <label>Gender: </label>
                                 <input type="radio" name="gender" ng-model="Gender" value="Male" /><label>Male</label>
                                 <input type="radio" name="gender" ng-model="Gender" value="Female" /><label>Female</label>
-                                <input type="radio" name="gender" ng-model="Gender" value="Other" /><label>Other</label>
+                                @*<input type="radio" name="gender" ng-model="Gender" value="Other" /><label>Other</label>*@
                             </div>
                             <div class="large-4 columns"><label>Qualification</label><input ng-disabled="isView" type="text" placeholder="Enter qualification" ng-model="Contact.Qualification" id="Qualification" maxlength="100" /> </div>
                             <div class="large-4 columns"><label>Occupation</label><input ng-disabled="isView" type="text" placeholder="Enter occupation" ng-model="Contact.Occupation" id="Occupation" maxlength="100" /> </div>
@@ -380,15 +380,15 @@
                         <div class="large-1 medium-1 columns hide-for-small-only"><label style="padding-left:20px">{{contact.ContactId}}</label><img ng-src="/memberImages/{{(contact.HasImage) ? contact.CustomerId + '/' + contact.ContactId : 'no'}}_mobthumb.png" /> </div>
                         <div class="large-2 medium-2 columns hide-for-small-only"><label></label><label>&nbsp;{{contact.Title}}. {{contact.FirstName}} {{contact.LastName}}</label></div>
                         <div class="large-2 medium-2 columns hide-for-small-only"><label></label><label>&nbsp;{{(contact.Address1 != null) ? contact.Address1 : ''}} {{(contact.Address2!=null && contact.Address2 !='') ?  ', ' + contact.Address2 : ''}} {{(contact.City!=null && contact.City != '') ? ', ' + contact.City : ''}}</label></div>
-                        <div class="large-2 medium-2 columns hide-for-small-only"><label></label><label>&nbsp;{{contact.PhoneNumber}}</label></div>
+                        <div class="large-2 medium-2 columns hide-for-small-only"><label></label><label>&nbsp;{{contact.PhoneNumber}} {{(contact.MobileNumber != null ? '/ ' + contact.MobileNumber : '')}} </label></div>
                         <div class="large-2 medium-2 columns hide-for-small-only"><label></label><label>&nbsp;{{contact.YearIncome | currency:"₹":2 }} </label></div>
                         <div class="large-2 medium-2 columns hide-for-small-only"><label></label><label>&nbsp;{{contact.Email}}</label></div>
                         <div class="large-1 medium-1 columns">
-                            <a pdf ng-click="view(contact.ContactId);"><div class="view"></div> </a>
+                            <a title="view" pdf ng-click="view(contact.ContactId);"><div class="view"></div> </a>
                             <div class="spacer">&nbsp;</div>
-                            <a ng-click="edit(contact.ContactId)"><div class="edit"></div></a>
+                            <a title="edit" ng-click="edit(contact.ContactId)"><div class="edit"></div></a>
                             <div class="spacer">&nbsp;</div>
-                            <a ng-click="delete(contact.ContactId)"><div class="delete"></div></a>
+                            <a title="delete" ng-click="delete(contact.ContactId)"><div class="delete"></div></a>
                             <div class="spacer">&nbsp;</div>
                             <a pdf ng-click="exportToPdfSingle(contact.ContactId);"><div class="view-pdf"></div> </a>
                             <div class="spacer">&nbsp;</div>
