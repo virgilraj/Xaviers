@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "Users";
+    }
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row" ng-controller="userCtrl" ng-init="load(0)">
+    <div class="addedit" ng-show="!isList">
+        <div class="larg-2 medium-2 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+        <div class="larg-8 medium-8 columns">
+            <fieldset>
+                <legend><b>Users</b></legend>
+                <div class="row">
+                    <div class="large-12 medium-12 columns">
+                        <div class="larg-2 medium-2 columns tiny button radius align-right" ng-click="showUser();">Users List</div>
+                    </div>
+                </div>
+                <div class="panel">
+
+                    <form name="myForm">
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label>Name</label>
+                                <input type="text" ng-change="changeName()" ng-disabled="isView" ng-model="payerDetail" typeahead-on-select="getEmail()" required placeholder="Enter name" typeahead="contact as contact.Name for contact in getAll($viewValue) | filter:$viewValue" class="form-control" maxlength="150" ng-pattern="/[a-zA-Z]+/">
+                            </div>
+                            <div class="large-6 columns"><label>Email / User Id</label><input ng-disabled="isView" required type="email" placeholder="Enter email" ng-model="User.Email" id="Email" maxlength="100" /> </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns"><label>Password</label><input required ng-disabled="isView" type="password" placeholder="Enter password" ng-model="User.Password" id="Password" maxlength="50" /> </div>
+                            <div class="large-6 columns">
+                                <label>Role</label>
+                                <select id="purpose" required ng-model="User.Role">
+                                    <option value="A">Admin</option>
+                                    <option value="U">User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row"><i class="small-font">* Red and green highlighted fields are mandatory</i></div>
+                        <div class="row">
+                            <div class="large-4 columns">&nbsp; </div>
+                            <div class="large-4 columns align-center">
+                                <div class="row">
+                                    <div ng-hide="true" id="Id" ng-model="User.Id"></div>
+                                    <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-click="reset()" type="button" value="Reset" />
+                                    <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-hide="!isUpdate" ng-show="isUpdate" ng-click="update(myForm)" type="button" value="Update" />
+                                    <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-hide="isUpdate" ng-show="!isUpdate" ng-click="save(myForm)" type="submit" value="Save" />
+                                </div>
+                            </div>
+                            <div class="large-4 columns">&nbsp; </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <div class="larg-2 medium-2 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+    </div>
+    <div class="list" ng-show="isList">
+        <div class="larg-12 medium-12 columns ">
+            <fieldset>
+                <legend>Users</legend>
+                <div class="row">
+                    <div class="large-12 medium-12 columns" style="float:left">
+                        <div>
+                            <a href="#" class="tiny radius button" ng-click="addUser();"><label>Add User</label> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row panel">
+                    <div class="large-2 medium-2 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button split align-left"><label>ID</label> </a>
+                    </div>
+                    <div class="large-2 medium-2 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button"><label>Name</label></a>
+                    </div>
+                    <div class="large-2 medium-2 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button"><label>Email</label></a>
+                    </div>
+                    <div class="large-2 medium-2 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button"><label>Role</label></a>
+                    </div>
+                    <div class="large-2 medium-2 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary button "><label>Active</label> </a>
+                    </div>
+                    <div class="large-2 medium-2 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary button "><label>Action</label> </a>
+                    </div>
+
+                    <div id="grid" class="row" ng-class-odd="'grid-row'" ng-class-even="'grid-row-alternate'" ng-repeat="user in users">
+                        <div class="small-12 columns show-for-small-only">
+                            <div class="row">
+                                <div class="columns small-6">
+                                    <label><b>Id: </b> &nbsp;{{user.Id}}</label>
+                                    <label><b>Name: </b> &nbsp;{{user.ContactName}}</label>
+                                </div>
+                                <div class="columns small-6">
+                                    <label> <b>Amount: </b> &nbsp;{{user.Email}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="columns small-6">
+                                    <label> <b>Date: </b> &nbsp;{{user.Role}}</label>
+                                </div>
+                                <div class="columns small-6">
+                                    <label> <b>Group: </b> &nbsp;{{(user.IsDelete) ? 'Inactivate' : 'Active'}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="large-2 medium-2 columns hide-for-small-only"><label style="padding-left:20px">{{user.Id}}</label></div>
+                        <div class="large-2 medium-2 columns hide-for-small-only"><label>&nbsp;{{user.ContactName}}</label></div>
+                        <div class="large-2 medium-2 columns hide-for-small-only"><label>&nbsp;{{user.Email}}</label></div>
+                        <div class="large-2 medium-2 columns hide-for-small-only"><label>&nbsp;{{user.Role}}</label></div>
+                        <div class="large-2 medium-2 columns hide-for-small-only"><label>&nbsp;{{(user.IsDelete) ? 'Inactivate' : 'Active'}}</label></div>
+                        <div class="large-2 medium-2 columns">
+                            <a pdf ng-click="view(user.Id);"><div class="view"></div> </a>
+                            <div class="spacer">&nbsp;</div>
+                            <a href="javascript:void(0)" ng-hide="(user.Role =='SA')"  ng-click="edit(user.Id)"><div class="edit"></div></a>
+                            <div class="spacer">&nbsp;</div>
+                            <a href="javascript:void(0)" ng-hide="(user.Role =='SA')" ng-click="delete(user.Id)"><div class="delete"></div></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <pagination boundary-links="true" total-items="totalItems" items-per-page="25" page="currentPage" max-size="maxSize" ng-model="aaa" on-select-page="pageChange(page)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                </div>
+
+            </fieldset>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/user.js"></script>

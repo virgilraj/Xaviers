@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fa85467e73504a65b315e169ae1980a9" Name="Diagram1" ZoomLevel="52">
+        <EntityTypeShape EntityType="XaviersModel.Contact" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.Customer" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.Expense" Width="1.5" PointX="16.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.Income" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.IncomeExpenseGroup" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.Qualification" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.Tax" Width="1.5" PointX="5.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.TaxCollection" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.TaxExcludedMember" Width="1.5" PointX="8" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.tblColumn" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.User" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XaviersModel.WorkExperience" Width="1.625" PointX="3.625" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="XaviersModel.FK_Qualification_Contact" ManuallyRouted="false" />
+        <AssociationConnector Association="XaviersModel.FK_Users_Contact" ManuallyRouted="false" />
+        <AssociationConnector Association="XaviersModel.FK_WorkExperience_WorkExperience" ManuallyRouted="false" />
+        <AssociationConnector Association="XaviersModel.FK_TaxCollection_TaxCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="XaviersModel.FK_TaxExcludedMember_Tax" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="XaviersModel.RecurringTax" Width="1.5" PointX="13.125" PointY="3.375" />
+        <EntityTypeShape EntityType="XaviersModel.RecurringTaxCollection" Width="1.5" PointX="15.625" PointY="1" />
+        <AssociationConnector Association="XaviersModel.FK_RecurringTaxCollection_RecurringTax" />
+        <EntityTypeShape EntityType="XaviersModel.AccountBalance" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="XaviersModel.SmallSavingsCollection" Width="1.5" PointX="8.375" PointY="14.75" />
+        <EntityTypeShape EntityType="XaviersModel.SmallSavingsSettlement" Width="1.5" PointX="3.375" PointY="15.75" />
+        <EntityTypeShape EntityType="XaviersModel.Loan" Width="1.5" PointX="10.375" PointY="16.125" />
+        <EntityTypeShape EntityType="XaviersModel.LoanCollection" Width="1.5" PointX="12.625" PointY="16.5" />
+        <AssociationConnector Association="XaviersModel.FK_LoanCollection_Loan" />
+        <EntityTypeShape EntityType="XaviersModel.MailContact" Width="1.5" PointX="16.625" PointY="9.25" />
+        <EntityTypeShape EntityType="XaviersModel.MailGroup" Width="1.5" PointX="14.375" PointY="9" />
+        <AssociationConnector Association="XaviersModel.FK_MailContacts_MailGroup" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,357 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+@*<link href="~/Content/styles.css" rel="stylesheet" />
+<link href="~/Content/datepicker/default.css" rel="stylesheet" />*@
+@*<script src="~/Scripts/contact.js"></script>*@
+<script type="text/javascript">
+    //angular.module('myModule', []);
+    var url = '../api/Test';
+    //var app = angular.module('myModule', ['mm.foundation']);
+    //the factory object for the webAPI call.
+    //app.factory('contactRepository', function ($http) {
+    //    return {
+    //        getContacts: function (callback) {
+    //            $http.get(url).success(callback);
+    //        }
+    //        ,
+
+    //        getContacts: function (callback, filter) {
+    //            var addurl = url + "/1";
+    //            $http.get(url, filter).success(callback);
+    //        },
+    //        //method for insert
+    //        insertContact: function (callback, contact) {
+    //            //var user = { "id": user.id, "city": user.city, "name": user.name, "address": user.address, "contactNo": user.contactNo, "emailId": user.emailId };
+    //            var addurl = url;
+    //            $http.post(url, contact).success(callback);
+    //        }
+    //    }
+    //});
+    //app.factory('dataFactory', function ($http) {
+    //    return {
+    //        get: function (url) {
+    //            return $http.get(url).then(function (resp) {
+    //                return resp.data; // success callback returns this
+    //            });
+    //        }
+    //    };
+    //});
+
+    //app.controller('dateCtrl', function ($scope) {
+    //    $scope.daydatepicker = new Date().getDate();
+    //    //$scope.monthdatepicker = getMonthlyDate();
+    //    //$scope.yeardatepicker = getYearlyDate();
+    //    //$scope.weekdatepicker = getWeeklyDate();
+    //    //$scope.bizdevweekdatepicker = getBizDevWeeklyDate();
+    //});
+
+    //app.directive('daydatepicker', function () {
+    //    return {
+    //        restrict: 'A',
+    //        require: 'ngModel',
+    //        link: function (scope, element, attrs, ngModelCtrl) {
+    //            $(function () {
+    //                $('#date1').Zebra_DatePicker({
+    //                    format: 'd-m-Y',
+    //                    direction: -1,
+    //                    onSelect: function (date) {
+    //                        ngModelCtrl.$setViewValue(date);
+    //                        scope.$apply();
+    //                    }
+    //                });
+    //            });
+    //        }
+    //    }
+    //});
+
+    //app.directive('daydatepickerfrom', function () {
+    //    return {
+    //        restrict: 'A',
+    //        require: 'ngModel',
+    //        link: function (scope, element, attrs, ngModelCtrl) {
+    //            $(function () {
+    //                $("input[id^='daydatepickerf']").Zebra_DatePicker({
+    //                    direction: -1,
+    //                    format: 'd-m-Y',
+    //                    pair: $("input[id^='daydatepickert']"),
+    //                    onSelect: function (date) {
+    //                        ngModelCtrl.$setViewValue(date);
+    //                        scope.$apply();
+    //                    }
+    //                });
+    //            });
+    //        }
+    //    }
+    //});
+
+    //app.directive('daydatepickerto', function () {
+    //    return {
+    //        restrict: 'A',
+    //        require: 'ngModel',
+    //        link: function (scope, element, attrs, ngModelCtrl) {
+    //            $(function () {
+    //                $("input[id^='daydatepickert']").Zebra_DatePicker({
+    //                    direction: -1,
+    //                    format: 'd-m-Y',
+    //                    onSelect: function (date) {
+    //                        ngModelCtrl.$setViewValue(date);
+    //                        scope.$apply();
+    //                    }
+    //                });
+    //            });
+    //        }
+    //    }
+    //});
+
+    //app.directive('typeahead', function ($timeout) {
+    //    return {
+    //        restrict: 'AEC',
+    //        scope: {
+    //            items: '=',
+    //            prompt: 'xx',
+    //            title: 'xx',
+    //            subtitle: 'xx',
+    //            model: '=',
+    //            onSelect: '&'
+    //        },
+    //        link: function (scope, elem, attrs) {
+    //            scope.handleSelection = function (selectedItem) {
+    //                scope.model = selectedItem;
+    //                scope.current = 0;
+    //                scope.selected = true;
+    //                $timeout(function () {
+    //                    scope.onSelect();
+    //                }, 200);
+    //            };
+    //            scope.current = 0;
+    //            scope.selected = true;
+    //            scope.isCurrent = function (index) {
+    //                return scope.current == index;
+    //            };
+    //            scope.setCurrent = function (index) {
+    //                scope.current = index;
+    //            };
+    //        },
+    //        templateUrl: 'templates/templateurl.html'
+    //    }
+    //});
+
+    function contactCtrl($scope, contactRepository, dataFactory) {
+        dataFactory.get('states.json').then(function (data) {
+            $scope.items = data;
+        });
+        $scope.name = ''; // This will hold the selected item
+        $scope.onItemSelected = function () { // this gets executed when an item is selected
+            console.log('selected=' + $scope.name);
+        };
+
+        $scope.daydatepicker = new Date().getDate();
+        $scope.names = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolsas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
+        $scope.filter = { pageNumber: 1, pageSize: 5 };
+        $scope.load = function () {
+
+            contactRepository.getContacts(function (results) {
+                $scope.contacts = results;
+            }, $scope.filter);
+        }
+
+        $scope.save = function () {
+            alert($scope.Contact.DOB + '||' + $scope.Contact.DOJ);
+            //contactRepository.insertContact(function () {
+            //    alert('customer inserted successfully');
+            //    $scope.load();
+            //}, $scope.Contact);
+        }
+    }
+
+    function contactInsertCtrl($scope, contactRepository) {
+        $scope.save = function () {
+             insertContact();
+        }
+        function insertContact() {
+            contactRepository.insertContact(function () {
+                alert('customer inserted successfully');
+            },$scope.Contact);
+        }
+    }
+
+    var PaginationDemoCtrl = function ($scope) {
+        $scope.totalItems = 64;
+        $scope.currentPage = 4;
+        $scope.maxSize = 5;
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+        $scope.changed = function()
+        {
+            alert('asda');
+        }
+        $scope.bigTotalItems = 175;
+        $scope.bigCurrentPage = 1;
+    };
+
+    function DefaultCtrl($scope) {
+        $scope.names = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
+    }
+
+</script>
+
+<div>
+    @*<script type="text/ng-template" id="customTemplate.html">
+        <a>
+            <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+            <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+        </a>
+    </script>*@
+    <div class='container-fluid' ng-controller="TypeaheadCtrl">
+
+        <h4>Static arrays</h4>
+        <pre>Model: {{selected.ContactId | json}}</pre>
+        @*<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">*@
+
+        @*<h4>Asynchronous results</h4>
+        <pre>Model: {{asyncSelected | json}}</pre>
+        <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="address for address in getLocation($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control">
+        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+
+        <h4>Custom templates for results</h4>
+        <pre>Model: {{customSelected | json}}</pre>
+        <input type="text" ng-model="customSelected" placeholder="Custom template" typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control">*@
+    </div>
+    <div ng-controller="contactCtrl">
+
+    <form name="myForm">
+        <input type="text" ng-model="selected" typeahead="name for name in names | filter:$viewValue | limitTo:8" class="form-control">
+
+            <h4>Asynchronous results</h4>
+            <pre>Model: {{asyncSelected.ContactId | json}}</pre>
+        @*<input type="text" ng-model="selected" placeholder="Locations loaded via $http" typeahead="address for address in getLocation($viewValue) | filter:$viewValue" class="form-control">*@
+        <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="contact as contact.FirstName for contact in getLocation($viewValue) | filter:$viewValue" class="form-control">
+            
+            <span> <b>Customer Details</b></span>
+            <table>
+                <tr>
+                    <td>Id </td>
+                    <td> <input type="text" ng-model="Contact.ContactId" />*(PLEASE ENTER UNIQUE ID)</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td> <input type="text" ng-model="Contact.FirstName" /></td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td> <input type="text" ng-model="Contact.LastName" /></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td> <input type="text" ng-model="Contact.Address1" /></td>
+                </tr>
+                <tr>
+                    <td>Contact No</td>
+                    <td> <input type="text" ng-model="Contact.Title" /></td>
+                </tr>
+                <tr>
+                    <td>Email-Id</td>
+                    <td> <input type="text" ng-model="Contact.Email" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div style="width:200px">
+                            <input type="text" class="datepicker" ng-model="Contact.DOB" daydatepicker id="date1" />
+                            <input type="text" ng-model="Contact.DOJ" class="datepicker" daydatepickerfrom id="daydatepickerfrom" />
+                            <input type="text" ng-model="Contact.DOD"  class="datepicker" daydatepickerto id="daydatepickerto" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <ul ng-repeat="gri in gridOptions">
+                            <li><input type="text" ng-model="gri.Id" /><input type="text" ng-model="gri.FName" /><input type="text" ng-model="gri.LName" /></li>
+                        </ul>
+                        <input id="Submit1" ng-click="save()" type="submit" value="submit" />
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+
+
+        <div class="div-table-greay">
+            <div class="div-table-row-head">
+                <div class="div-table-col-head">
+                    Customer Id
+                    <div id='cssmenu'>
+                        <ul>
+                            <li class='has-sub'>
+                                <a href='#'></a>
+                                <ul>
+                                    <li class='has-sub'>
+                                        <a href='#'><span>Product 1</span></a>
+                                        <ul>
+                                            <li><a href='#'><span>Sub Product</span></a></li>
+                                            <li class='last'><a href='#'><span>Sub Product</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class='has-sub'>
+                                        <a href='#'><span>Product 2</span></a>
+                                        <ul>
+                                            <li><a href='#'><span>Sub Product</span></a></li>
+                                            <li class='last'><a href='#'><span>Sub Product</span></a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="div-table-col-head">Customer Name</div>
+                <div class="div-table-col-head">Customer Address</div>
+            </div>
+            <span ng-init="load()">
+                <div ng-class-odd="'div-table-row'" ng-class-even="'div-table-row-alternate'" ng-repeat="contact in contacts | orderBy:['FirstName','LastName'] ">
+                    <div class="div-table-col">{{contact.ContactId}}</div>
+                    <div class="div-table-col">{{contact.FirstName}}</div>
+                    <div class="div-table-col">{{contact.LastName}}</div>
+                </div>
+
+            </span>
+        </div>
+        <div>
+            <pagination page="currentPage" total-items="totalItems" ng-model="currentPage" ng-click="alert(1)"></pagination>
+        </div>
+    </div>
+
+    <div ng-controller="PaginationDemoCtrl">
+        <h4>Default</h4>
+        <pagination total-items="totalItems" page="currentPage"></pagination>
+        <pagination boundary-links="true" total-items="totalItems" page="currentPage" max-size="maxSize" ng-model="aaa" on-select-page="pageChange(page)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        <pagination direction-links="false" boundary-links="true" total-items="totalItems" page="currentPage"></pagination>
+        <pagination direction-links="false" total-items="totalItems" page="currentPage" num-pages="smallnumPages"></pagination>
+        <pre>The selected page no: {{currentPage}}</pre>
+        <button class="button secondary" ng-click="setPage(3)">Set current page to: 3</button>
+
+        <hr />
+        <h4>Pager</h4>
+        <pager total-items="totalItems" page="currentPage"></pager>
+
+        <hr />
+        <h4>Limit the maximum visible buttons</h4>
+        <pagination total-items="bigTotalItems" page="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></pagination>
+        <pagination total-items="bigTotalItems" page="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+        <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre>
+    </div>
+
+    </div>
+
+    @*<script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/datepicker/zebra_datepicker.js"></script>*@
+    <script type="text/javascript">
+
+
+    </script>

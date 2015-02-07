@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    @*Set the viewport width to device width for mobile *@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewBag.Title - pugal.in</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    @Styles.Render("~/Content/foundation/css")
+    @Styles.Render("~/Content/AppStyles")
+
+    @RenderSection("head", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+@if (ViewBag.UserData != null) {
+    <script type="text/javascript">
+        var logo = '@ViewBag.UserData.HasLogo';
+        var rle = '@ViewBag.UserData.Role';
+        var displayTitle = '@ViewBag.UserData.DisplayGroupName'
+        var custid = '@ViewBag.UserData.CustomerId'
+        var sFDate = ['@ViewBag.UserData.CurrentSartFinanceYearDatae', '@ViewBag.UserData.CurrentEndFinanceYearDatae']
+        var SFYer = @ViewBag.UserData.StartFinanceYear
+        var CFYer = @ViewBag.UserData.CurrentFinanceYear
+    </script>
+}
+else
+{
+    var sFDate = 1;
+}
+</head>
+<body>
+    <div ng-app="myModule">
+        <div class="row">
+            <div class="large-6 medium-6 small-6 columns align-left">
+                <a href="/contact"> <img style="float:left" src="/images/logo.png" /><br /><label>&nbsp;<b>pugal.in</b></label></a>
+            </div>
+            <div class="large-6 medium-6 small-6 columns">
+                <p class="right">
+                    @if (ViewBag.UserData != null) { 
+                    <label>Welcome @ViewBag.UserData.Name</label>
+                    }
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row sticky">
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+
+                    <li class="name">
+                        <h1>
+                            <a href="#">
+                                @if (ViewBag.UserData != null) {@ViewBag.UserData.DisplayGroupName }
+                            </a>
+                        </h1>
+                    </li>
+                    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+                </ul>
+@if (ViewBag.UserData != null)
+{
+                <section class="top-bar-section">
+@if (ViewBag.UserData.Role == "U") {
+                    <ul class="right">
+                        <li class="has-dropdown">
+                            <a href="/Contact/Member/@ViewBag.UserData.ContactId">My Profile</a>
+                            <ul class="dropdown">
+                                <li class="show-for-small-only"><a href="/Contact/Member/@ViewBag.UserData.ContactId">My Profile</a></li>
+                                <li><a href="/Customer/ChangePassword">Change password</a></li>
+                                <li><a href="/Home/ForgotPassword">Forgot password</a></li>
+                                <li><a href="/Home/Logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+}
+else {
+                <ul class="right">
+                    <li class="has-dropdown">
+                        <a href="/Contact">Contacts Manangement</a>
+                        <ul class="dropdown">
+                            <li><a href="/Contact">Contacts</a></li>
+                            <li><a href="/MailGroup">Group</a></li>
+                            <li><a href="/MailGroup/MailCampaign">Mail Campaign</a></li>
+                        </ul>
+                    </li>
+                        <li class="divider"></li>
+                        <li class="has-dropdown">
+                            <a href="/Tax">Tax Manangement</a>
+                            <ul class="dropdown">
+                                <li><a href="/Tax">Tax</a></li>
+                                <li><a href="/Tax/Taxcollection">Tax Collection</a></li>
+                                <li><a href="/Tax/RecurringTax">Recurring Tax</a></li>
+                                <li><a href="/Tax/RecurringTaxCollection">Recurring Tax Collection</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="has-dropdown">
+                            <a href="/Income">Income/Expense</a>
+                            <ul class="dropdown">
+                                <li><a href="/Income">Income</a></li>
+                                <li><a href="/Expense">Expense</a></li>
+                            </ul>
+                        </li>
+                    <li class="divider"></li>
+                    <li class="has-dropdown">
+                        <a href="/SmallSavings">Small Savings/Loan Mgt</a>
+                        <ul class="dropdown">
+                            <li><a href="/SmallSavings">Small Savings</a></li>
+                            <li><a href="/SmallSavings/SavingsReturns">Small Savings Returns</a></li>
+                            <li><a href="/Loan">Loan</a></li>
+                            <li><a href="/Loan/LoanCollection">Loan Collection</a></li>
+                        </ul>
+                    </li>
+                        <li class="divider"></li>
+                        <li class="has-dropdown">
+                            <a href="/Report/Dashboard">Dashboard</a>
+                            <ul class="dropdown">
+                                <li><a href="/Report">Audit Reports</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                    <li class="has-dropdown">
+                    @if (ViewBag.UserData.Role == "SA")
+                            {
+                            <a href="/Customer/UpdateCustomer/@ViewBag.UserData.CustomerId">My Profile</a>
+                        }else
+                        {
+                            <a href="/Contact/Member/@ViewBag.UserData.CustomerId">My Profile</a>
+                        }
+                    <ul class="dropdown">
+                        <li class="show-for-small-only">
+                            @if (ViewBag.UserData.Role == "SA")
+                            {
+                                <a href="/Customer/UpdateCustomer/@ViewBag.UserData.CustomerId">My Profile</a>
+                            }
+                            else
+                            {
+                                <a href="/Contact/Member/@ViewBag.UserData.CustomerId">My Profile</a>
+                            }
+                        </li>
+                        <li><a href="/Customer/Users">Users</a></li>
+                        <li><a href="/Customer/ChangePassword">Change password</a></li>
+                        <li><a href="/Customer/Logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+}
+                </section>
+}
+            </nav>
+        </div>
+
+        @RenderBody()
+        <footer class="row">
+            <div class="large-12 columns">
+                <hr />
+                <div class="row">
+                    <div class="large-6 columns">
+                        <i>© 2015 www.pugal.in</i>
+                    </div>
+                    @*<div class="large-6 columns">
+                        <ul class="inline-list right">
+                            <li><a href="#">Section 1</a></li>
+                            <li><a href="#">Section 2</a></li>
+                            <li><a href="#">Section 3</a></li>
+                            <li><a href="#">Section 4</a></li>
+                        </ul>
+                    </div>*@
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    @*Use the Scripts section to define page specific scripts*@
+    @Scripts.Render("~/bundles/app")
+    @Scripts.Render("~/bundles/Angular")
+    @Scripts.Render("~/bundles/foundation")
+    <script>
+        $(document).foundation();
+        var app = angular.module('myModule', ['mm.foundation', 'utilityServices']);
+    </script>
+    <script src="~/Scripts/app.js"></script>
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,317 @@
+﻿
+@{
+    ViewBag.Title = "Recurring Tax Collection";
+}
+
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row" ng-controller="taxCollectionCtrl" ng-init="load(0)">
+    <div class="addedit" ng-show="!isList">
+        <div class="larg-2 medium-2 hide-for-small-only columns"> &nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+        <div class="larg-8 medium-8 columns">
+            <fieldset>
+                <legend><b>Recurring Tax Collection</b></legend>
+                <div class="row">
+                    <div class="large-12 medium-12 columns">
+                        <div class="larg-2 medium-2 columns tiny button radius align-right" ng-click="showTaxCollection();">Recurring Tax Collection List</div>
+                    </div>
+                </div>
+                <div class="panel">
+
+                    <form name="myForm">
+                        <div class="row">
+                            <div class="large-6 columns"><label>Tax Name</label><input ng-disabled="isView" type="text" typeahead-on-select="getInstanceBalance()" ng-change="changeTax()" ng-model="taxDetail" required placeholder="Enter name" typeahead="tax as tax.TaxName for tax in GetTaxes($viewValue) | filter:$viewValue" class="form-control" maxlength="50" ng-pattern="/[a-zA-Z]+/" /> </div>
+                            <div class="large-6 columns">
+                                <label>Name</label>
+                                <input type="text" ng-change="changeName()" ng-disabled="isView" ng-model="payerDetail" required typeahead-on-select="getInstanceBalance()" placeholder="Enter name" typeahead="contact as contact.Name for contact in getAll($viewValue) | filter:$viewValue" class="form-control" maxlength="150" ng-pattern="/[a-zA-Z]+/">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label>Tax Amount: </label>
+                                <input type="number" ng-disabled="isView" min="0" placeholder="Enter tax amount " required ng-model="Tax.Amount" />
+                            </div>
+                            <div class="large-6 columns"><label>&nbsp;</label> <input ng-disabled="isView" type="text" placeholder="Enter description" ng-model="Tax.Description" id="Description" maxlength="200" /></div>
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label>Type</label>
+                                <select id="purpose" ng-model="Tax.PayType" ng-disabled="isTypeChange">
+                                    <option value="M">Monthly</option>
+                                    <option value="Y">Yearly</option>
+                                    <option value="L">Lifetime</option>
+                                </select>
+                            </div>
+                            <div class="large-6 columns"><label>Received Date</label><input type="text" ng-disabled="isView" required placeholder="Enter received date" ng-model="Tax.ReceivedDate" daydatepickerfinace id="fdate1" /> </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label>Balance Amount : {{BalanceAmount}}</label>
+                            </div>
+                            <div class="large-6 columns">
+                                <label>Total Received Amount : {{TotalReceivedAmount}}</label>
+                            </div>
+                        </div>
+                        <div class="row"><i class="small-font">* Red and green highlighted fields are mandatory</i></div>
+                        <div class="row">
+                            <div class="large-3 columns">&nbsp; </div>
+                            <div class="large-6 columns align-center">
+                                <div class="row">
+                                    <div ng-hide="true" id="Id" ng-model="Tax.Id"></div>
+                                    <input id="Submit1" class="small button radius round" ng-disabled="isView" ng-click="reset()" type="button" value="Reset" />
+                                    <input id="Submit1" class="small button radius round" ng-disabled="isView" ng-hide="!isUpdate" ng-show="isUpdate" ng-click="update(myForm, false)" type="button" value="Update" />
+                                    <input id="Submit1" class="small button radius round" ng-disabled="isView" ng-hide="!isUpdate" ng-show="isUpdate" ng-click="update(myForm, true)" type="button" value="Update and Approve" />
+                                    <input id="Submit1" class="small button radius round" ng-disabled="isView" ng-hide="isUpdate" ng-show="!isUpdate" ng-click="save(myForm, false)" type="submit" value="Save" />
+                                    <input id="Submit1" class="small button radius round" ng-disabled="isView" ng-hide="isUpdate" ng-show="!isUpdate" ng-click="save(myForm, true)" type="submit" value="Save and Approve" />
+                                </div>
+                            </div>
+                            <div class="large-3 columns">&nbsp; </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <div class="larg-2 medium-2 hide-for-small-only columns"> &nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+    </div>
+    <div class="list" ng-show="isList">
+        <div class="larg-12 medium-12 columns ">
+            <fieldset>
+                <legend>Recurring Tax Collection</legend>
+                <div class="row">
+                    <div class="large-12 medium-12 columns" style="float:left">
+                        <div>
+                            <a class="tiny radius button dropdown split" data-dropdown="filter"><label>Filter</label> </a>
+                            <ul id="filter" class="f-dropdown" data-dropdown-content>
+                                <li>&nbsp;</li>
+                                <li>@*<label>&nbsp;Tax Name</label>*@<input placeholder="By tax name" type="text" ng-model="Filter.TaxName" /> </li>
+                                <li>@*<label>&nbsp;Name</label>*@<input placeholder="By first name" type="text" ng-model="Filter.Name" /> </li>
+                                <li>@*<label>&nbsp;Amount</label>*@<input placeholder="By amount" type="text" ng-model="Filter.Amount" /> </li>
+                                <li><label>&nbsp;From Date</label><input type="text" placeholder="Date format dd-mm-yyyy" ng-model="Filter.FDate" /> </li>
+                                <li><label>&nbsp;To Date</label><input type="text" placeholder="Date format dd-mm-yyyy" ng-model="Filter.TDate" /> </li>
+                                <li>&nbsp;</li>
+                                <li><a class="tiny radius button" ng-click="topfilter()"> Search</a></li>
+                                <li><a class="tiny radius button" ng-click="claerTopFilter()"> Clear </a></li>
+                            </ul>
+                            <a href="#" class="tiny radius button" pdf ng-click="exportToPdf();"><label>Export to PDF</label> </a>
+                            <a href="#" class="tiny radius button" ng-click="addTaxCollection();"><label>Add Tax Collection</label> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row panel">
+                    <div class="large-1 medium-1 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button split align-left"><label>ID</label> </a>
+                    </div>
+                    <div class="large-2 medium-2 columns">
+                        <a href="#" class="tiny secondary radius button split"><label>Tax Name</label> <span class="taxnamefilter" data-dropdown="drop"></span></a>
+                        <ul id="drop" class="f-dropdown" data-dropdown-content>
+                            <li>
+                                <div class="row">
+                                    <div class="columns"><input type="text" placeholder="Tax name" id="taxnamefilterText" ng-model="taxnamefilter.Text" /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns">
+                                        <select class="tiny secondary" id="taxnamefilterOptions" ng-model="taxnamefilter.Options">
+                                            <option ng-repeat="lst in searchoptions" value="{{lst.value}}" ng-selected="singleSearchDefault === lst.text">{{lst.text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns large-6 align-searchfilter">
+                                        <div class="search" ng-click="filter()"></div>
+
+                                    </div>
+                                    <div class="columns large-6">
+                                        <div class="delete" ng-click="clearTaxNamefilter()"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="large-2 medium-2 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button split"><label>Name</label> <span class="namefilter" data-dropdown="drop11"></span></a>
+                        <ul id="drop11" class="f-dropdown" data-dropdown-content>
+                            <li>
+                                <div class="row">
+                                    <div class="columns"><input type="text" placeholder="Name" id="nameFilterText" ng-model="nameFilter.Text" /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns">
+                                        <select class="tiny secondary" id="nameFilterOptions" ng-model="nameFilter.Options">
+                                            <option ng-repeat="lst in searchoptions" value="{{lst.value}}" ng-selected="singleSearchDefault === lst.text">{{lst.text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns large-6 align-searchfilter">
+                                        <div class="search" ng-click="filter()"></div>
+
+                                    </div>
+                                    <div class="columns large-6">
+                                        <div class="delete" ng-click="clearNamefilter()"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="large-1 medium-1 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button split"><label>Amount</label> <span class="amountFilter" data-dropdown="drop2"></span></a>
+                        <ul id="drop2" class="f-dropdown" data-dropdown-content>
+                            <li>
+                                <div class="row">
+                                    <div class="columns"><input type="text" placeholder="Amount" id="dateFilterText" ng-model="amountFilter.Text" /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns">
+                                        <select class="tiny secondary" id="amountFilterOptions" ng-model="amountFilter.Options">
+                                            <option ng-repeat="lst in searchNum" value="{{lst.value}}" ng-selected="searchNumDefault === lst.text">{{lst.text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns large-6 align-searchfilter">
+                                        <div class="search" ng-click="filter()"></div>
+
+                                    </div>
+                                    <div class="columns large-6">
+                                        <div class="delete" ng-click="clearAmountFilter()"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="large-1 medium-1 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary button "><label>Received</label> </a>
+                    </div>
+                    <div class="large-1 medium-1 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary button "><label>Balance</label> </a>
+                    </div>
+                    <div class="large-1 medium-1 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary radius button split"><label>Date</label> <span class="dateFilter" data-dropdown="drop3"></span></a>
+                        <ul id="drop3" class="f-dropdown" data-dropdown-content>
+                            <li>
+                                <div class="row">
+                                    <div class="columns">
+                                        From date<br />
+                                        <input type="text" placeholder="dd-mm-yyyy" id="dateFilterText" ng-model="dateFilter.Text" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns">
+                                        To date <br />
+                                        <input type="text" placeholder="dd-mm-yyyy" id="dateFilterText1" ng-model="dateFilter.Text1" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns">
+                                        <select class="tiny secondary" id="dateFilterOptions" ng-model="dateFilter.Options">
+                                            <option ng-repeat="lst in searchNum" value="{{lst.value}}" ng-selected="searchNumDefault === lst.text">{{lst.text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns large-6 align-searchfilter">
+                                        <div class="search" ng-click="filter()"></div>
+
+                                    </div>
+                                    <div class="columns large-6">
+                                        <div class="delete" ng-click="clearDatefilter()"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="large-2 medium-2 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary button radius split"><label>Description</label> <span class="descriptionFilter" data-dropdown="drop4"></span></a>
+                        <ul id="drop4" class="f-dropdown" data-dropdown-content>
+                            <li>
+                                <div class="row">
+                                    <div class="columns"><input type="text" placeholder="Description" id="descriptionFilterText" ng-model="descriptionFilter.Text" /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns">
+                                        <select class="tiny secondary" id="descriptionFilterOptions" ng-model="descriptionFilter.Options">
+                                            <option ng-repeat="lst in searchoptions" value="{{lst.value}}" ng-selected="singleSearchDefault === lst.text">{{lst.text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="columns large-6 align-searchfilter">
+                                        <div class="search" ng-click="filter()"></div>
+
+                                    </div>
+                                    <div class="columns large-6">
+                                        <div class="delete" ng-click="clearGroupFilter()"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="large-1 medium-1 columns hide-for-small-only">
+                        <a href="#" class="tiny secondary button "><label>Action</label> </a>
+                    </div>
+
+                    <div id="grid" class="row" ng-class-odd="'grid-row'" ng-class-even="'grid-row-alternate'" ng-repeat="tax in taxs">
+                        <div class="small-12 columns show-for-small-only">
+                            <div class="row">
+                                <div class="columns small-6">
+                                    <label><b>Id: </b> &nbsp;{{tax.Id}}</label>
+                                    <label><b>Tax Name: </b> &nbsp;{{tax.TaxName}}</label>
+                                </div>
+                                <div class="columns small-6">
+                                    <label> <b>Contact Name: </b> &nbsp;{{tax.ContactName}}</label>
+                                    <label> <b>Amount: </b> &nbsp;{{tax.Amount | currency:"₹":2}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="columns small-6">
+                                    <label> <b>Tot. Received: </b> &nbsp;{{getReceived(tax.RecurringTaxId, tax.ContactId)| currency:"₹":2}}</label>
+                                    <label> <b>Balance: </b> &nbsp;{{getBalance(tax.RecurringTaxId, tax.ContactId)| currency:"₹":2}}</label>
+                                </div>
+                                <div class="columns small-6">
+                                    <label> <b>Date: </b> &nbsp;{{tax.ReceivedDate |date:"dd-MM-yyyy" }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="large-1 medium-1 columns hide-for-small-only"><label style="padding-left:20px">{{tax.Id}}</label></div>
+                        <div class="large-2 medium-2 columns hide-for-small-only"><label>&nbsp;{{tax.TaxName}}</label></div>
+                        <div class="large-2 medium-2 columns hide-for-small-only"><label>&nbsp;{{tax.ContactName}}</label></div>
+                        <div class="large-1 medium-1 columns hide-for-small-only"><label>&nbsp;{{tax.Amount| currency:"₹":2}}</label></div>
+                        <div class="large-1 medium-1 columns hide-for-small-only"><label>&nbsp;{{getReceived(tax.RecurringTaxId, tax.ContactId)| currency:"₹":2}}</label></div>
+                        <div class="large-1 medium-1 columns hide-for-small-only"><label>&nbsp;{{getBalance(tax.RecurringTaxId, tax.ContactId)| currency:"₹":2}}</label></div>
+                        <div class="large-1 medium-1 columns hide-for-small-only"><label>&nbsp;{{tax.ReceivedDate |date:"dd-MM-yyyy" }}</label></div>
+                        <div class="large-2 medium-2 columns hide-for-small-only"><label>&nbsp;{{tax.Description}}</label></div>
+                        <div class="large-1 medium-1 columns">
+                            <a pdf ng-click="view(tax.Id);"><div class="view"></div> </a>
+                            <div class="spacer">&nbsp;</div>
+                            <a href="javascript:void(0)" ng-hide="(tax.IsApprove && !IsSA)" ng-click="edit(tax.Id)"><div class="edit"></div></a>
+                            <div class="spacer">&nbsp;</div>
+                            <a href="javascript:void(0)" ng-hide="(tax.IsApprove && !IsSA)" ng-click="delete(tax.Id)"><div class="delete"></div></a>
+                            <div class="spacer">&nbsp;</div>
+                            <a pdf ng-click="exportToPdfSingle(tax.Id);"><div class="view-pdf"></div> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <pagination boundary-links="true" total-items="totalItems" items-per-page="25" page="currentPage" max-size="maxSize" ng-model="aaa" on-select-page="pageChange(page)" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                </div>
+
+            </fieldset>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/recurringtaxcollection.js"></script>
+

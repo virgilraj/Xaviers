@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Update Profile";
+}
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row" ng-controller="customerCtrl" ng-init="edit()">
+    <div class="addedit">
+        <div class="larg-2 medium-2 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+        <div class="larg-8 medium-8 columns">
+            <fieldset>
+                <legend><b>My Profile</b></legend>
+                <div class="panel">
+
+                    <form name="myForm">
+                        <div class="row">
+                            <div class="large-4 columns"><label>Title</label><input type="text" required placeholder="Enter title (Ex. Mr, Mrs, Dr, Er..)" ng-model="Customer.Title" id="Title" maxlength="14" ng-pattern="/[a-zA-Z]+/" /> </div>
+                            <div class="large-4 columns"><label>First name</label><input type="text" required placeholder="Enter first name" ng-model="Customer.FirstName" id="FirstName" maxlength="70" ng-pattern="/[a-zA-Z]+/" /> </div>
+                            <div class="large-4 columns"><label>Last name</label><input type="text" required placeholder="Enter last name" ng-model="Customer.LastName" id="LasttName" maxlength="70" ng-pattern="/[a-zA-Z]+/" /> </div>
+
+                        </div>
+                        <fieldset>
+                            <legend>Address:</legend>
+                            <div class="row">
+                                <div class="large-4 columns"><label>Address1</label><input type="text" placeholder="Enter address1 (Ex. number, street)" ng-model="Customer.Address1" id="Address1" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>Address2</label><input type="text" placeholder="Enter address2 (Ex. Apt no)" ng-model="Customer.Address2" id="Address2" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>City</label><input type="text" placeholder="Enter city" ng-model="Customer.City" id="City" maxlength="70" /> </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-4 columns"><label>State</label><input type="text" placeholder="Enter state" ng-model="Customer.State" id="State" maxlength="50" /> </div>
+                                <div class="large-4 columns"><label>Country</label><input type="text" placeholder="Enter country" ng-model="Customer.Country" id="Country" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>Pin</label><input type="text" placeholder="Enter pin/zip code" ng-model="Customer.PinCode" id="PinCode" maxlength="20" /> </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <div class="large-4 columns"><label>Phone number</label><input type="text" required placeholder="Enter phone number" ng-model="Customer.PhoneNumber" id="PhoneNumber" maxlength="17" ng-pattern="/[0-9]+/" /> </div>
+                            <div class="large-4 columns"><label>Email / User Id</label><input required type="email" placeholder="Enter email" ng-model="Customer.Email" id="Email" maxlength="100" /> </div>
+                            <div class="large-4 columns"><label>Password</label><input required type="password" placeholder="Enter password" ng-model="Customer.Password" id="Password" maxlength="50" /> </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-4 columns"><label>Group Name</label><input type="text" required placeholder="Enter church/temple/group name" ng-model="Customer.DisplayName" id="LasttName" maxlength="70" ng-pattern="/[a-zA-Z]+/" /> </div>
+                            <div class="large-4 columns">
+                                <label>Purpose</label>
+                                <select id="purpose" ng-model="Customer.Purpose">
+                                    <option value="church">Church</option>
+                                    <option value="temple">Temple</option>
+                                    <option value="group">Group</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="large-4 columns">
+                                <label>Change your Logo</label>
+                                <input type="file" file-model="myFile" />
+                            </div>
+                        </div>
+                        <fieldset><legend>Accout setting</legend>
+                            <div class="row">
+                                <div class="large-6 columns"><label>Starting financial year</label><input type="number" placeholder="Enter starting financial year" ng-model="Customer.StartFinaceYer" id="StartFinaceYer" maxlength="5"> </div>
+                                <div class="large-6 columns"><label>Opening balance</label><input type="number" placeholder="Enter starting opening balance" ng-model="Customer.OpeningBalance" id="StartFinaceYer" maxlength="10" /> </div>
+                                <div class="large-6 columns"><label>Current financial year</label><input type="number" placeholder="Enter current financial year" ng-model="Customer.CurrentFinanceyear" id="StartFinaceYer" maxlength="5"> </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <div class="large-3 columns">&nbsp; </div>
+                            <div class="large-6 columns align-center">
+                                <div class="row">
+                                    <div ng-hide="true" id="CustomerId" ng-model="Customer.Id"></div>
+                                    <input id="Submit1" class="small button radius round" ng-click="reset()" type="button" value="Reset" />
+                                    <input id="Submit1" class="small button radius round" ng-click="update(myForm)" type="button" value="Update" />
+                                </div>
+                            </div>
+                            <div class="large-3 columns">&nbsp; </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <div class="larg-2 medium-2 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/customer.js"></script>

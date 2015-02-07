@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Mail Campaign";
+}
+<script src="/Scripts/ckeditor/ckeditor.js"></script>
+
+<div class="row" ng-controller="mailCtrl" ng-init="load(0)">
+    <div class="addedit" ng-show="!isList">
+        <div class="larg-2 medium-2 hide-for-small-only columns">
+            &nbsp;
+            @*<div class="callout panel">
+                    Add Banner
+                </div>*@
+        </div>
+        <div class="larg-8 medium-8 columns">
+            <fieldset>
+                <legend><b>Mail Campaign</b></legend>
+                <div class="row">
+                    <div class="large-12 medium-12 columns">
+                        <div class="larg-2 medium-2 columns tiny button radius align-right" ng-click="showMailGroup();">Mail Groups</div>
+                    </div>
+                </div>
+                <div class="panel">
+
+                    <form name="myForm">
+                        <div class="row">
+                            <div class="columns large-12">
+                                <label>Emails</label> <input type="text" ng-model="Mail.Emails" placeholder="Enter email" maxlength="150">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="columns large-12">
+                                <label>Mail group</label> 
+                                <input type="text" ng-disabled="isView" ng-model="MailGroup" placeholder="Enter mail group" typeahead="group as group.GroupName for group in getAll($viewValue) | filter:$viewValue" class="form-control" maxlength="150" ng-pattern="/[a-zA-Z]+/">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Subject</label>
+                                <input type="text" ng-model="Mail.Subject" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns" style="float:left">
+                                <textarea class="ckeditor" ng-model="$parent.htmlText" id="editor1" name="editor1" rows="10"></textarea>
+                            </div>
+                        </div>
+                        <div class="row"><i class="small-font">* Red and green highlighted fields are mandatory</i></div>
+                        <div class="row">
+                            <div class="large-3 columns">&nbsp; </div>
+                            <div class="large-6 columns align-center">
+                                <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-click="reset()" type="button" value="Reset" />
+                                <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-hide="isUpdate" ng-show="!isUpdate" ng-click="send(myForm, false)" type="submit" value="Send Mail" />
+                            </div>
+                            <div class="large-3 columns">&nbsp; </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <div class="larg-2 medium-2 hide-for-small-only columns">
+            &nbsp;
+            @*<div class="callout panel">
+                    Add Banner
+                </div>*@
+        </div>
+    </div>
+</div>
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('editor1');
+</script>
+
+<script src="~/Scripts/mailCampaign.js"></script>

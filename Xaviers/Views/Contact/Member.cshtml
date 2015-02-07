@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "Profile";
+}
+<div class="row">&nbsp;
+   
+</div>
+
+<div class="row" ng-controller="contactCtrl" ng-init="loadMember()">
+    <div class="addedit">
+        <div class="larg-2 medium-2 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+        <div class="larg-8 medium-8 columns">
+            <fieldset>
+                <legend><b>My Profile</b></legend>
+                <div class="row" ng-hide="isCompany">
+                    <div class="large-12 medium-12 columns">
+                        <a class="tiny radius button" pdf ng-click="pendingAndreceivedList('bal', Contact.ContactId, Contact.FirstName + ' ' + Contact.LastName);">Tax Pending</a>
+                        <a class="tiny radius button" pdf ng-click="pendingAndreceivedList('rec', Contact.ContactId, Contact.FirstName + ' ' + Contact.LastName);">Tax Paid</a>
+                        <a class="tiny radius button" pdf ng-click="pendingAndreceivedList('rbal', Contact.ContactId, Contact.FirstName + ' ' + Contact.LastName);">Recurring Tax Pending</a>
+                        <a class="tiny radius button" pdf ng-click="pendingAndreceivedList('rrec', Contact.ContactId, Contact.FirstName + ' ' + Contact.LastName);">Recurring Tax Paid</a>
+                        <a class="tiny radius button" pdf ng-click="pendingList(Contact.ContactId, Contact.FirstName + ' ' + Contact.LastName);">Loan Pending</a>
+                    </div>
+                </div>
+                <div class="panel">
+                    <form name="myForm">
+                        <div class="row">
+                            <div class="large-4 columns">
+                                <label>Title</label>
+                                <select ng-model="Contact.Title" ng-disabled="isView" required ng-change="titleChange()">
+                                    <option selected="selected" value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Company">Company</option>
+                                </select>
+                                @*<input ng-disabled="isView" type="text" required placeholder="Enter title (Ex. Mr, Mrs, Dr, Er..)"  id="Title" maxlength="14" ng-pattern="/[a-zA-Z]+/" />*@
+                            </div>
+                            <div class="large-4 columns"><label>{{fNme}}</label><input ng-disabled="isView" type="text" required placeholder="Enter first name / Company Name" ng-model="Contact.FirstName" id="FirstName" maxlength="70" ng-pattern="/[a-zA-Z]+/" /> </div>
+                            <div class="large-4 columns"><label>{{lNme}}</label><input ng-disabled="isView" type="text" required placeholder="Enter last name / Proprietor / Contact Name" ng-model="Contact.LastName" id="LasttName" maxlength="70" ng-pattern="/[a-zA-Z]+/" /> </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-4 columns">
+                                <label>Gender: </label>
+                                <input type="radio" name="gender" ng-model="Gender" value="Male" /><label>Male</label>
+                                <input type="radio" name="gender" ng-model="Gender" value="Female" /><label>Female</label>
+                                <input type="radio" name="gender" ng-model="Gender" value="Other" /><label>Other</label>
+                            </div>
+                            <div class="large-4 columns"><label>Qualification</label><input ng-disabled="isView" type="text" placeholder="Enter qualification" ng-model="Contact.Qualification" id="Qualification" maxlength="100" /> </div>
+                            <div class="large-4 columns"><label>Occupation</label><input ng-disabled="isView" type="text" placeholder="Enter occupation" ng-model="Contact.Occupation" id="Occupation" maxlength="100" /> </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-4 columns"><label>Phone number</label><input ng-disabled="isView" type="text" required placeholder="Enter phone number" ng-model="Contact.PhoneNumber" id="PhoneNumber" maxlength="17" ng-pattern="/[0-9]+/" /> </div>
+                            <div class="large-4 columns"><label>Mobile number</label><input ng-disabled="isView" type="text" placeholder="Enter mobile number" ng-model="Contact.MobileNumber" id="MobileNumber" maxlength="17" ng-pattern="/[0-9]+/" /> </div>
+                            <div class="large-4 columns"><label>Email</label><input ng-disabled="isView" type="email" placeholder="Enter email" ng-model="Contact.Email" id="Email" maxlength="100" /> </div>
+                        </div>
+                        <div class="row" ng-hide="isCompany">
+                            <div class="large-4 columns">
+                                <label>Spouse name</label>
+                                <input type="text" ng-disabled="isView" ng-model="spouseDetail" placeholder="Enter spouse name" typeahead="female as female.Name for female in getFemales($viewValue) | filter:$viewValue" class="form-control" maxlength="100">
+                            </div>
+                            <div class="large-4 columns">
+                                <label>Date of birth</label>
+                                <input type="text" ng-disabled="true" placeholder="Enter date of birth" ng-model="Contact.DOB" daydatepickerfrom id="daydatepickerfrom" />
+                            </div>
+                            <div class="large-4 columns">
+                                <label>Date of Leave</label>
+                                <input ng-disabled="isView" type="text" placeholder="Enter date of leave" ng-model="Contact.DOL" daydatepicker8 id="date8" />
+                            </div>
+                            <div ng-hide="true" id="SpouseId" ng-model="Contact.SpouseId" ng-value="0"></div>
+                        </div>
+                        <fieldset>
+                            <legend>Permanent Address:</legend>
+                            <div class="row">
+                                <div class="large-4 columns"><label>Address1</label><input ng-disabled="isView" type="text" placeholder="Enter address1 (Ex. number, street)" ng-model="Contact.Address1" id="Address1" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>Address2</label><input ng-disabled="isView" type="text" placeholder="Enter address2 (Ex. Apt no)" ng-model="Contact.Address2" id="Address2" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>City</label><input ng-disabled="isView" type="text" placeholder="Enter city" ng-model="Contact.City" id="City" maxlength="70" /> </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-4 columns"><label>State</label><input ng-disabled="isView" type="text" placeholder="Enter state" ng-model="Contact.State" id="State" maxlength="50" /> </div>
+                                <div class="large-4 columns"><label>Country</label><input ng-disabled="isView" type="text" placeholder="Enter country" ng-model="Contact.Country" id="Country" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>Pin</label><input ng-disabled="isView" type="text" placeholder="Enter pin/zip code" ng-model="Contact.PinCode" id="PinCode" maxlength="20" /> </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Communication Address:</legend>
+                            <div class="row">
+                                <div class="large-4 columns"><label>Address1</label><input ng-disabled="isView" type="text" placeholder="Enter address1 (Ex. number, street)" ng-model="Contact.ComAddress1" id="ComAddress1" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>Address2</label><input ng-disabled="isView" type="text" placeholder="Enter address2 (Ex. Apt no)" ng-model="Contact.ComAddress" id="ComAddress" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>City</label><input ng-disabled="isView" type="text" placeholder="Enter city" ng-model="Contact.ComCity" id="ComCity" maxlength="70" /> </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-4 columns"><label>State</label><input ng-disabled="isView" type="text" placeholder="Enter state" ng-model="Contact.ComState" id="ComState" maxlength="50" /> </div>
+                                <div class="large-4 columns"><label>Country</label><input ng-disabled="isView" type="text" placeholder="Enter country" ng-model="Contact.ComCountry" id="ComCountry" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>Pin</label><input ng-disabled="isView" type="text" placeholder="Enter pin/zip code" ng-model="Contact.ComPinCode" id="ComPinCode" maxlength="20" /> </div>
+                            </div>
+                        </fieldset>
+                        <fieldset ng-hide="isCompany">
+                            <legend>Family Details:</legend>
+                            <div class="row">
+                                <div class="large-4 columns">
+                                    <label>Father name</label>
+                                    <input type="text" ng-disabled="isView" ng-model="fatherDetail" placeholder="Enter father name" typeahead="male as male.Name for male in getMales($viewValue) | filter:$viewValue" class="form-control" maxlength="100">
+                                </div>
+                                <div class="large-4 columns">
+                                    <label>Mother name</label>
+                                    <input type="text" ng-disabled="isView" ng-model="motherDetail" placeholder="Enter mother name" typeahead="female as female.Name for female in getFemales($viewValue) | filter:$viewValue" class="form-control" maxlength="100">
+                                </div>
+                                <div class="large-4 columns">
+                                    <label>Guardian name</label>
+                                    <input type="text" ng-disabled="isView" ng-model="guardianDetail" placeholder="Enter guardian name" typeahead="all as all.Name for all in getAll($viewValue) | filter:$viewValue" class="form-control" maxlength="100">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset ng-hide="isCompany">
+                            <legend>Income Details</legend>
+                            <div class="row">
+                                <div class="large-4 columns"><label>Annual Income</label><input ng-disabled="isView" type="number" placeholder="Enter annual Income" ng-model="Contact.YearIncome" id="YearIncome" maxlength="10" /> </div>
+                                <div class="large-4 columns">
+                                    <label>Eligible for Tax</label>
+                                    <input type="radio" ng-disabled="true" name="eligible" ng-model="Eligible" value="Yes" /><label>Yes</label>
+                                    <input type="radio" ng-disabled="true" name="eligible" ng-model="Eligible" value="No" /><label>No</label>
+                                </div>
+                                <div class="large-4 columns">
+                                    <label>Member </label>
+                                    <input type="radio" ng-disabled="true" name="member" ng-model="Member" value="Yes" /><label>Yes</label>
+                                    <input type="radio" ng-disabled="true" name="member" ng-model="Member" value="No" /><label>No</label>
+                                </div>
+                            </div>
+                        </fieldset>
+@if (ViewBag.UserData != null && ViewBag.UserData.CommonGroupName == "church")
+{
+                        <fieldset ng-hide="isCompany">
+                            <legend>HolySacrament Details:</legend>
+                            <div class="row">
+                                <div class="large-3 columns"><label>Baptism date</label><input ng-disabled="true" type="text" placeholder="Enter date of baptism" ng-model="Contact.BaptismDate" daydatepicker id="date1" /> </div>
+                                <div class="large-3 columns"><label>Eucharist </label><input ng-disabled="true" type="text" placeholder="Enter date of eucharist" ng-model="Contact.Eucharist" daydatepicker2 id="date2" /> </div>
+                                <div class="large-3 columns"><label>Reconciliation date</label><input ng-disabled="true" type="text" placeholder="Enter date of reconciliation" ng-model="Contact.Reconciliation" daydatepicker3 id="date3" /> </div>
+                                <div class="large-3 columns"><label>Confirmation</label><input ng-disabled="true" type="text" placeholder="Enter date of confirmation" ng-model="Contact.Confirmation" daydatepicker4 id="date4" /> </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-3 columns"><label>Marriage date</label><input ng-disabled="true" type="text" placeholder="Enter date of marriage" ng-model="Contact.Marriage" daydatepicker5 id="date5" /> </div>
+                                <div class="large-3 columns"><label>Holy orders date</label><input ng-disabled="true" type="text" placeholder="Enter date of holy orders" ng-model="Contact.HolyOrders" daydatepicker6 id="date6" /> </div>
+                                <div class="large-3 columns"><label>Date of anointing of the sick</label><input ng-disabled="true" type="text" placeholder="Enter date of anointing of the sick" ng-model="Contact.AnointingoftheSick" daydatepicker7 id="date7" /> </div>
+                                <div class="large-3 columns">
+                                    <label>Expired Date</label>
+                                    <input ng-disabled="isView" type="text" placeholder="Enter Expired date" ng-model="Contact.DOD" daydatepickerto id="daydatepickertto" />
+                                </div>
+                            </div>
+                        </fieldset>
+}
+                        <fieldset>
+                            <legend>Upload your picture:</legend>
+                            <div class="row">
+                                <div class="large-6 medium-6 columns">
+                                    <input type="file" file-model="myFile" />
+                                </div>
+                                <div class="large-6 medium-6 columns">
+                                    <img ng-src="/memberImages/{{(Contact.HasImage) ? Contact.CustomerId + '/' + Contact.ContactId : 'no'}}_thumb.png" />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row"><i class="small-font">* Red and green highlighted fields are mandatory</i></div>
+                        <div class="row">
+                            <div class="large-4 columns">&nbsp; </div>
+                            <div class="large-4 columns align-center">
+                                <div class="row">
+                                    <div ng-hide="true" id="ContactId" ng-model="Contact.ContactId"></div>
+                                    <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-click="reset()" type="button" value="Reset" />
+                                    <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-click="update(myForm)" type="button" value="Update" />
+                                </div>
+                            </div>
+                            <div class="large-4 columns">&nbsp; </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <div class="larg-2 medium-2 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/contacts.js"></script>

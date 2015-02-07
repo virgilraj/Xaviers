@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Registration";
+}
+<div class="row">&nbsp;
+</div>
+
+<div class="row" ng-controller="customerCtrl" >
+    <div class="addedit">
+        <div class="larg-2 medium-2 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+        <div class="larg-8 medium-8 columns">
+            <fieldset>
+                <legend><b>Registration</b></legend>
+                <div class="panel">
+                    <form name="myForm">
+                        <div class="row">
+                            <div class="large-4 columns"><label>Title</label>
+                                <select ng-model="Customer.Title" ng-disabled="isView" required ng-change="titleChange()">
+                                    <option selected="selected" value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                </select>
+                            </div>
+                            <div class="large-4 columns"><label>First name</label><input type="text" required placeholder="Enter first name" ng-model="Customer.FirstName" id="FirstName" maxlength="70" ng-pattern="/[a-zA-Z]+/" /> </div>
+                            <div class="large-4 columns"><label>Last name</label><input type="text" required placeholder="Enter last name" ng-model="Customer.LastName" id="LasttName" maxlength="70" ng-pattern="/[a-zA-Z]+/" /> </div>
+
+                        </div>
+                        <fieldset>
+                            <legend>Address:</legend>
+                            <div class="row">
+                                <div class="large-4 columns"><label>Address1</label><input type="text" placeholder="Enter address1 (Ex. number, street)" ng-model="Customer.Address1" id="Address1" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>Address2</label><input type="text" placeholder="Enter address2 (Ex. Apt no)" ng-model="Customer.Address2" id="Address2" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>City</label><input type="text" placeholder="Enter city" ng-model="Customer.City" id="City" maxlength="70" /> </div>
+                            </div>
+                            <div class="row">
+                                <div class="large-4 columns"><label>State</label><input type="text" placeholder="Enter state" ng-model="Customer.State" id="State" maxlength="50" /> </div>
+                                <div class="large-4 columns"><label>Country</label><input type="text" placeholder="Enter country" ng-model="Customer.Country" id="Country" maxlength="70" /> </div>
+                                <div class="large-4 columns"><label>Pin</label><input type="text" placeholder="Enter pin/zip code" ng-model="Customer.PinCode" id="PinCode" maxlength="20" /> </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <div class="large-4 columns"><label>Phone number</label><input type="text" required placeholder="Enter phone number" ng-model="Customer.PhoneNumber" id="PhoneNumber" maxlength="17" ng-pattern="/[0-9]+/" /> </div>
+                            <div class="large-4 columns"><label>Email / User Id</label><input required type="email" placeholder="Enter email" ng-model="Customer.Email" id="Email" maxlength="100" /> </div>
+                            <div class="large-4 columns"><label>Password</label><input required type="password" placeholder="Enter password" ng-model="Customer.Password" id="Password" maxlength="50" /> </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="large-4 columns"><label>Group Name</label><input type="text" required placeholder="Enter church/temple/group name" ng-model="Customer.DisplayName" id="LasttName" maxlength="70" ng-pattern="/[a-zA-Z]+/" /> </div>
+                            <div class="large-4 columns">
+                                <label>Purpose</label>
+                                <select id="purpose" ng-model="Customer.Purpose">
+                                    <option value="church">Church</option>
+                                    <option value="temple">Temple</option>
+                                    <option value="group">Group</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="large-4 columns">
+                                <label>Upload your Logo</label>
+                                <input type="file" file-model="myFile" />
+                            </div>
+                        </div>
+                        <div  class="row"><i class="small-font">* Red and green highlighted fields are mandatory</i></div>
+                        <div class="row">
+                            <div class="large-4 columns">&nbsp; </div>
+                            <div class="large-4 columns align-center">
+                                <input id="Submit1" class="small button radius round" ng-click="reset()" type="button" value="Reset" />
+                                <input id="Submit1" class="small button radius round" ng-hide="!isUpdate" ng-show="isUpdate" ng-click="update(myForm)" type="button" value="Update" />
+                                <input id="Submit1" class="small button radius round" ng-hide="isUpdate" ng-show="!isUpdate" ng-click="save(myForm)" type="button" value="Save" />
+                            </div>
+                            <div class="large-4 columns">&nbsp; </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <div class="larg-2 medium-2 hide-for-small-only columns">&nbsp;
+            @*<div class="callout panel">
+                Add Banner
+            </div>*@
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/customer.js"></script>
+

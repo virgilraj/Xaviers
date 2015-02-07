@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+<div class="row">
+    &nbsp;
+</div>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1.1', { packages: ['corechart', 'controls'] });
+    google.setOnLoadCallback(loadChart);
+</script>
+
+<div class="row" ng-controller="reportCtrl" ng-init="chart()">
+    <div class="addedit">
+       
+        <div class="large-12 columns">
+            <div class="row panel">
+                <div class="large-4 columns"><label class="align-right">Select Financial Year</label></div>
+                <div class="large-4 columns">
+                    <select id="year" ng-model="selYear" ng-change="getCharts()">
+                        <option ng-repeat="yr in yearList">{{yr}}</option>
+                    </select>
+                </div>
+                <div class="large-4 columns">&nbsp;</div>
+            </div>
+            <div class="row">
+                <fieldset class="panel">
+                    <legend><b>Income Expense reports</b></legend>
+                    <div class="large-12 columns" style="height:350px" id="incomeexpense"></div>
+                </fieldset>
+            </div>
+            <div class="row panel">
+                    <div class="large-6 columns" >
+                        <fieldset >
+                            <legend><b>Income reports</b></legend>
+                            <div id="income"></div>
+                        </fieldset>
+                    </div>
+                    <div class="large-6 columns">
+                        <fieldset>
+                            <legend><b>Expense reports</b></legend>
+                            <div id="expense"></div>
+                        </fieldset>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/ng-google-chart.js"></script>*@
+<script src="~/Scripts/reports.js"></script>
+
