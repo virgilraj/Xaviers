@@ -114,18 +114,22 @@
                             </div>
                         </fieldset>
                         <fieldset ng-hide="isCompany">
-                            <legend>Income Details</legend>
+                            <legend></legend>
                             <div class="row">
-                                <div class="large-4 columns"><label>Annual Income</label><input ng-disabled="isView" type="number" min="0" placeholder="Enter annual Income" ng-model="Contact.YearIncome" id="YearIncome" maxlength="10" /> </div>
-                                <div class="large-4 columns">
+                                <div class="large-3 columns"><label>Annual Income</label><input ng-disabled="isView" type="number" min="0" placeholder="Enter annual Income" ng-model="Contact.YearIncome" id="YearIncome" maxlength="10" /> </div>
+                                <div class="large-3 columns">
                                     <label>Eligible for Tax</label>
                                     <input type="radio" name="eligible" ng-model="Eligible" value="Yes" /><label>Yes</label>
                                     <input type="radio" name="eligible" ng-model="Eligible" value="No" /><label>No</label>
                                 </div>
-                                <div class="large-4 columns">
+                                <div class="large-3 columns">
                                     <label>Member of @ViewBag.UserData.CommonGroupName</label>
                                     <input type="radio" name="member" ng-model="Member" value="Yes" /><label>Yes</label>
                                     <input type="radio" name="member" ng-model="Member" value="No" /><label>No</label>
+                                </div>
+                                <div class="large-3 columns">
+                                    <label>Group</label>
+                                    <input type="text" ng-disabled="isView" ng-model="MailGroup" placeholder="Enter group name" typeahead="group as group.GroupName for group in getGroups($viewValue) | filter:$viewValue" class="form-control" maxlength="150" ng-pattern="/[a-zA-Z]+/">
                                 </div>
                             </div>
                         </fieldset>

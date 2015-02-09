@@ -123,54 +123,67 @@ namespace BusinessLayer
                     {
                         double interestYear = ((double)loan.Amount * (double)loan.InterestRate) / 100;
                         double interestMonth = interestYear / 12;
+                        double latefee = loan.LateFee != null ? (double)loan.LateFee : 0;
                         switch (loan.LoanType)
                         {
                             case "M":
-
+                                
                                 double totInterest = interestMonth * (int)loan.InstalmentPeriod;
                                 double totAmtToPay = (double)loan.Amount + totInterest;
                                 double curEmi = totAmtToPay / (int)loan.InstalmentPeriod;
-                                double curNeedToPay = curEmi * (DateTime.Now.Month - loan.StartDate.Value.Month);
+                                curEmi = curEmi - Math.Round(curEmi) > 0 ? curEmi + 1 : curEmi;
+                                int monthDiff = (DateTime.Now.Year * 12 + DateTime.Now.Month) - (loan.StartDate.Value.Year * 12 + loan.StartDate.Value.Month);
+                                double curNeedToPay = monthDiff > (int)loan.InstalmentPeriod ? curEmi * (int)loan.InstalmentPeriod : curEmi * monthDiff;
+                                bool isOverDate = monthDiff > (int)loan.InstalmentPeriod;
+                                
+                                //double curNeedToPay = curEmi * (DateTime.Now.Month - loan.StartDate.Value.Month);
                                 double pendinglateFee = 0;
 
                                 loaninfo.Total = totAmtToPay;
                                 //check previous balance
                                 if (curNeedToPay  >  (loaninfo.TotalPrincipalPaid + loaninfo.TotalInterestPaid + curEmi))
                                 {
-                                    pendinglateFee = (DateTime.Now.Month - loan.StartDate.Value.Month) * (double)loan.LateFee;
-                                    curEmi = curNeedToPay - (loaninfo.TotalPrincipalPaid + loaninfo.TotalInterestPaid + curEmi);
+                                    pendinglateFee = monthDiff * latefee;
+                                    curEmi = curNeedToPay + pendinglateFee - (loaninfo.TotalPrincipalPaid + loaninfo.TotalInterestPaid + curEmi);
                                 }
 
                                 //late fee aplicable
                                 if(loan.InstalmentDueDay !=null && loan.InstalmentDueDay > 0 && loan.InstalmentDueDay < DateTime.Now.Day)
                                 {
-                                    pendinglateFee += loan.LateFee != null ? (double)loan.LateFee : 0;
+                                    pendinglateFee += latefee;
                                 }
 
                                 loaninfo.CurrentPrincipal = curEmi - interestMonth - loaninfo.TotalPrincipalPaid;
                                 loaninfo.CurrentInterest = interestMonth - loaninfo.TotalInterestPaid;
                                 loaninfo.CurrentLateFee = pendinglateFee;
-                                loaninfo.TotalAmountRequiredToClose = loaninfo.Total - loaninfo.TotalPrincipalPaid + loaninfo.TotalInterestPaid;
+                                loaninfo.TotalAmountRequiredToClose = (loaninfo.Total + pendinglateFee) - (loaninfo.TotalPrincipalPaid + loaninfo.TotalInterestPaid);
+
+                                if (isOverDate)
+                                {
+                                    loaninfo.CurrentPrincipal = loaninfo.TotalAmountRequiredToClose;
+                                    loaninfo.CurrentInterest = 0;
+                                }
 
                                 break;
                             case "Y":
                                 double totYEmi = interestYear * (int)loan.InstalmentPeriod;
                                 double totYAmtToPay = (double)loan.Amount + totYEmi;
                                 double curYEmi = totYAmtToPay / (int)loan.InstalmentPeriod;
+                                curYEmi = curYEmi - Math.Round(curYEmi) > 0 ? curYEmi + 1 : curYEmi;
                                 double curYNeedToPay = curYEmi * (DateTime.Now.Year - loan.StartDate.Value.Year);
                                 double pendingYlateFee = 0;
 
                                 loaninfo.Total = totYAmtToPay;
                                 if (curYNeedToPay > (loaninfo.TotalPrincipalPaid + loaninfo.TotalInterestPaid + curYEmi))
                                 {
-                                    pendingYlateFee = (DateTime.Now.Year - loan.StartDate.Value.Year) * (double)loan.LateFee;
+                                    pendingYlateFee = (DateTime.Now.Year - loan.StartDate.Value.Year) * latefee;
                                     curYEmi = curYNeedToPay - (loaninfo.TotalPrincipalPaid + loaninfo.TotalInterestPaid + curYEmi);
                                 }
 
                                 //late fee aplicable
                                 if(loan.InstalmentDueDay !=null && loan.InstalmentDueDay > 0 && loan.InstalmentDueDay < DateTime.Now.Month)
                                 {
-                                    pendingYlateFee += loan.LateFee != null ? (double)loan.LateFee : 0;
+                                    pendingYlateFee += latefee;
                                 }
 
                                 loaninfo.CurrentPrincipal = curYEmi - interestYear - loaninfo.TotalPrincipalPaid;
@@ -276,6 +289,7 @@ namespace BusinessLayer
                     {
                         double interestYear = ((double)loan.Amount * (double)loan.InterestRate) / 100;
                         double interestMonth = interestYear / 12;
+                        double lateFee = loan.LateFee != null ? (double)loan.LateFee : 0;
                         switch (loan.LoanType)
                         {
                             case "M":
@@ -283,26 +297,42 @@ namespace BusinessLayer
                                 double totInterest = interestMonth * (int)loan.InstalmentPeriod;
                                 double totAmtToPay = (double)loan.Amount + totInterest;
                                 double curEmi = totAmtToPay / (int)loan.InstalmentPeriod;
-                                int monthDiff = (DateTime.Now.Month - loan.StartDate.Value.Month);
-                                double curNeedToPay = curEmi * monthDiff;
-
+                                curEmi = curEmi - Math.Round(curEmi) > 0 ? curEmi + 1 : curEmi;
+                                int monthDiff = (DateTime.Now.Year * 12 + DateTime.Now.Month) - (loan.StartDate.Value.Year * 12 + loan.StartDate.Value.Month);
+                                double curNeedToPay = monthDiff > (int)loan.InstalmentPeriod ? curEmi * (int)loan.InstalmentPeriod + (monthDiff * lateFee) : curEmi * monthDiff;
+                                int overDueMonths = monthDiff > (int)loan.InstalmentPeriod ? monthDiff - (int)loan.InstalmentPeriod : 0;
                                 //check previous balance
+                                int period =loan.InstalmentPeriod !=null ?  (int)loan.InstalmentPeriod : 0;
                                 if (curNeedToPay > (totalPrincipalPaid + totalInterestPaid + curEmi))
                                 {
-                                    for (int i = 0; i < monthDiff; i++)
+                                    for (int i = 0; i < (int)loan.InstalmentPeriod; i++)
                                     {
                                         loanList.Add(new LoanInfo
                                         {
-                                            CurrentLateFee = (double)loan.LateFee,
+                                            CurrentLateFee = lateFee,
                                             LoanId = loan.Id,
                                             CurrentInterest = interestMonth,
                                             CurrentPrincipal = curEmi - interestMonth,
-                                            MonthOrYear = string.Format("{0}", DateTime.Now.AddMonths(-i).ToString("MMMM", CultureInfo.InvariantCulture)),
+                                            MonthOrYear = string.Format("{0} {1}", DateTime.Now.AddMonths(-(monthDiff - i)).ToString("MMMM", CultureInfo.InvariantCulture), DateTime.Now.AddMonths(-(monthDiff - i)).Year),
                                             Desciption = loan.Description,
                                             Name = loan.ContactName
                                         });
                                     }
 
+                                    if (lateFee > 0)
+                                    {
+                                        for (int i = 0; i < overDueMonths; i++)
+                                        {
+                                            loanList.Add(new LoanInfo
+                                            {
+                                                CurrentLateFee = lateFee,
+                                                LoanId = loan.Id,
+                                                MonthOrYear = string.Format("{0} {1}", DateTime.Now.AddMonths(-(monthDiff - period - i)).ToString("MMMM", CultureInfo.InvariantCulture), DateTime.Now.AddMonths(-(monthDiff - period - i)).Year),
+                                                Desciption = loan.Description,
+                                                Name = loan.ContactName
+                                            });
+                                        }
+                                    }
                                 }
 
                                 break;
@@ -310,16 +340,17 @@ namespace BusinessLayer
                                 double totYEmi = interestYear * (int)loan.InstalmentPeriod;
                                 double totYAmtToPay = (double)loan.Amount + totYEmi;
                                 double curYEmi = totYAmtToPay / (int)loan.InstalmentPeriod;
+                                curYEmi = curYEmi - Math.Round(curYEmi) > 0 ? curYEmi + 1 : curYEmi;
                                 int yearDiff = (DateTime.Now.Year - loan.StartDate.Value.Year);
                                 double curYNeedToPay = curYEmi * yearDiff;
-
+                                int overDueyears = yearDiff > (int)loan.InstalmentPeriod ? yearDiff - (int)loan.InstalmentPeriod : 0;
                                 if (curYNeedToPay > (totalPrincipalPaid + totalInterestPaid + curYEmi))
                                 {
-                                    for (int i = 0; i < yearDiff; i++)
+                                    for (int i = 0; i < (int)loan.InstalmentPeriod; i++)
                                     {
                                         loanList.Add(new LoanInfo
                                         {
-                                            CurrentLateFee = (double)loan.LateFee,
+                                            CurrentLateFee = loan.LateFee !=null ? (double)loan.LateFee : 0,
                                             LoanId = loan.Id,
                                             CurrentInterest = interestYear,
                                             CurrentPrincipal = curYEmi - interestYear,
@@ -327,6 +358,21 @@ namespace BusinessLayer
                                             Desciption = loan.Description,
                                             Name = loan.ContactName
                                         });
+                                    }
+
+                                    if (loan.LateFee != null)
+                                    {
+                                        for (int i = 0; i < overDueyears; i++)
+                                        {
+                                            loanList.Add(new LoanInfo
+                                            {
+                                                CurrentLateFee = (double)loan.LateFee,
+                                                LoanId = loan.Id,
+                                                MonthOrYear = string.Format("{0}", DateTime.Now.AddYears(-i).Year),
+                                                Desciption = loan.Description,
+                                                Name = loan.ContactName
+                                            });
+                                        }
                                     }
                                 }
 

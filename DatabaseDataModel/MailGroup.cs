@@ -26,6 +26,7 @@ namespace DatabaseDataModel
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> ModifyBy { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
+        public Nullable<int> Type { get; set; }
     
         public virtual ICollection<MailContact> MailContacts { get; set; }
     }

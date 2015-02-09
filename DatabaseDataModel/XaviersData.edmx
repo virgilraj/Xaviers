@@ -70,6 +70,8 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifyBy" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="75" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -219,6 +221,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifyBy" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="Type" Type="int" />
         </EntityType>
         <EntityType Name="Qualification">
           <Key>
@@ -634,6 +637,8 @@
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Contact" FromRole="Contact" ToRole="Users" />
           <NavigationProperty Name="WorkExperiences" Relationship="Self.FK_WorkExperience_WorkExperience" FromRole="Contact" ToRole="WorkExperience" />
           <Property Name="DOL" Type="DateTime" Precision="0" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="GroupName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -1142,6 +1147,7 @@
           <Property Name="ModifyBy" Type="Int32" />
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="MailContacts" Relationship="XaviersModel.FK_MailContacts_MailGroup" FromRole="MailGroup" ToRole="MailContact" />
+          <Property Name="Type" Type="Int32" />
         </EntityType>
         <Association Name="FK_MailContacts_MailGroup">
           <End Type="XaviersModel.MailGroup" Role="MailGroup" Multiplicity="0..1" />
@@ -1164,6 +1170,8 @@
           <EntitySetMapping Name="Contacts">
             <EntityTypeMapping TypeName="XaviersModel.Contact">
               <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="DOL" ColumnName="DOL" />
                 <ScalarProperty Name="ContactId" ColumnName="ContactId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -1586,6 +1594,7 @@
           <EntitySetMapping Name="MailGroups">
             <EntityTypeMapping TypeName="XaviersModel.MailGroup">
               <MappingFragment StoreEntitySet="MailGroup">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
                 <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

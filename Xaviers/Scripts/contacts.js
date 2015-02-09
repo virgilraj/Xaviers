@@ -55,6 +55,7 @@ function contactCtrl($scope, repository, $http, fileUpload, utilityService, $win
         $scope.fatherDetail = null;
         $scope.motherDetail = null;
         $scope.guardianDetail = null;
+        $scope.MailGroup = null;
     }
     $scope.showContact = function () {
         $scope.isUpdate = false;
@@ -275,14 +276,14 @@ function contactCtrl($scope, repository, $http, fileUpload, utilityService, $win
         {
             if(angular.isDefined($scope.Filter.Name) && $scope.Filter.Name !='')
             {
-                nameCon = "(startswith(FirstName, '" + $scope.Filter.Name + " ') or startswith(LastName, '" + $scope.Filter.Name + "'))";
+                nameCon = "(startswith(FirstName, '" + $scope.Filter.Name + "') or startswith(LastName, '" + $scope.Filter.Name + "'))";
             }
             if (angular.isDefined($scope.Filter.Address) && $scope.Filter.Address != '') {
-                addressCon = "(startswith(Address1, '" + $scope.Filter.Address + " ') or startswith(Address2, '" + $scope.Filter.Address + "') or  startswith(City, '" + $scope.Filter.City + "'))";
+                addressCon = "(startswith(Address1, '" + $scope.Filter.Address + "') or startswith(Address2, '" + $scope.Filter.Address + "') or  startswith(City, '" + $scope.Filter.City + "'))";
                 addressCon = nameCon != '' ? " and " + addressCon : addressCon;
             }
             if (angular.isDefined($scope.Filter.Phone) && $scope.Filter.Phone != '') {
-                phoneCon = "(startswith(PhoneNumber, '" + $scope.Filter.Phone + " ') or startswith(MobileNumber, '" + $scope.Filter.Phone + "'))";
+                phoneCon = "(startswith(PhoneNumber, '" + $scope.Filter.Phone + "') or startswith(MobileNumber, '" + $scope.Filter.Phone + "'))";
                 phoneCon = nameCon != '' || addressCon != '' ? " and " + phoneCon : phoneCon;
             }
             if (angular.isDefined($scope.Filter.Email) && $scope.Filter.Email != '') {
@@ -509,6 +510,11 @@ function contactCtrl($scope, repository, $http, fileUpload, utilityService, $win
         return repository.getWebApi(loadurl);
     };
 
+    $scope.getGroups = function (val) {
+         var grpUrl = "/api/MailGroup";
+         return repository.getWebApi(grpUrl + '/' + val);
+    };
+
     $scope.pendingAndreceivedList = function (typ, id, name) {
         //PDF headers
         var dispHead = ['Name', 'Amount', 'Received Amt', 'Balance Amt'];
@@ -584,11 +590,11 @@ function contactCtrl($scope, repository, $http, fileUpload, utilityService, $win
             cellWidth: 36,
             leftMargin: 0,
             topMargin: 2,
-            rowHeight: 12,
+            rowHeight: 16,
             titlefontsize: 18,
             headerfontsize: 12,
             cellfontsize: 6.5,
-            recordperpage: 10,
+            recordperpage: 12,
             name: 'contacts.pdf',
             l: {
                 orientation: 'l',
@@ -914,6 +920,14 @@ function setSpouseandParent(scope)
     else {
         scope.Contact.GuardianName = scope.guardianDetail;
     }
+
+    if (scope.MailGroup != null && angular.isDefined(scope.MailGroup.Id) && scope.MailGroup.Id != "" && scope.MailGroup.Id > 0) {
+        scope.Contact.GroupName = scope.MailGroup.GroupName;
+        scope.Contact.GroupId = scope.MailGroup.Id;
+    }
+    else {
+        scope.Contact.GroupName = scope.MailGroup;
+    }
 }
 
 function getSpouseandParent(scope) {
@@ -921,6 +935,7 @@ function getSpouseandParent(scope) {
     scope.fatherDetail = {};
     scope.motherDetail = {};
     scope.guardianDetail = {};
+    scope.MailGroup = {};
     if (scope.Contact.SpouseId != null && angular.isDefined(scope.Contact.SpouseId) && scope.Contact.SpouseId != "" && scope.Contact.SpouseId > 0) {
         scope.spouseDetail.Name = scope.Contact.SpouseName;
         scope.spouseDetail.ContactId = scope.Contact.SpouseId;
@@ -951,6 +966,14 @@ function getSpouseandParent(scope) {
     }
     else {
         scope.guardianDetail = scope.Contact.GuardianName;
+    }
+
+    if (scope.Contact.GroupId != null && angular.isDefined(scope.Contact.GroupId) && scope.Contact.GroupId != "" && scope.Contact.GroupId > 0) {
+        scope.MailGroup.GroupName = scope.Contact.GroupName;
+        scope.MailGroup.Id = scope.Contact.GroupId;
+    }
+    else {
+        scope.MailGroup = scope.Contact.GroupName;
     }
 }
 function checkSameNameOdataQuery(scope)

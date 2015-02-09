@@ -92,6 +92,7 @@ function customerCtrl($scope, repository, $http, fileUpload, utilityService, $lo
                 return false;
             }
         }
+        $scope.Customer.HasLogo = angular.isDefined($scope.myFile) && angular.isObject($scope.myFile) ? true : false;
         if ($scope.Customer != null && angular.isDefined($scope.Customer.Id) && $scope.Customer.Id > 0) {
             var updateurl = url + '/' + $scope.Customer.Id;
             repository.update(function () {
@@ -99,7 +100,7 @@ function customerCtrl($scope, repository, $http, fileUpload, utilityService, $lo
                 $scope.addCustomer();
             }, $scope.Customer, updateurl);
 
-            if ($scope.Customer != null && angular.isDefined($scope.Customer)) {
+            if ($scope.Customer != null && angular.isDefined($scope.Customer) && $scope.Customer.HasLogo) {
                 $scope.uploadFile($scope.Customer.Id);
             }
         }

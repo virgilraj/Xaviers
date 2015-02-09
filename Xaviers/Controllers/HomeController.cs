@@ -185,7 +185,7 @@ namespace Xaviers.Controllers
                             }
 
                             int startFinYear = (int)customer.StartFinaceYer;
-                            if ((loginuser.CurrentFinanceYear - 1) ==  startFinYear)
+                            if (customer.OpeningBalance !=null && loginuser.CurrentFinanceYear == startFinYear)
                             {
                                 loginuser.OpeningBalance = (double)customer.OpeningBalance;
                             }

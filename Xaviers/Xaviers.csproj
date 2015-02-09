@@ -658,9 +658,7 @@
     <Content Include="Views\MailGroup\Index.cshtml" />
     <Content Include="Views\MailGroup\MailCampaign.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\MailCampaign\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

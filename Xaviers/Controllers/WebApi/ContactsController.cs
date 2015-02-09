@@ -36,6 +36,8 @@ namespace Xaviers.Controllers
         IRepository<RecurringTaxCollection> recurringTaxCollectionRepository = null;
         IRepository<SmallSavingsCollection> smallSavingsCollectionRepository = null;
         IRepository<SmallSavingsSettlement> smallSavingsSettlementRepository = null;
+        IRepository<MailGroup> mailgroupRepository = null;
+        IRepository<MailContact> mailContactRepository = null;
 
         IUnitOfWork unitOfWork = null;
         Authentication auth = new Authentication();
@@ -56,6 +58,8 @@ namespace Xaviers.Controllers
             loancollectionRepository = unitOfWork.GetRepository<LoanCollection>();
             smallSavingsCollectionRepository = unitOfWork.GetRepository<SmallSavingsCollection>();
             smallSavingsSettlementRepository = unitOfWork.GetRepository<SmallSavingsSettlement>();
+            mailgroupRepository = unitOfWork.GetRepository<MailGroup>();
+            mailContactRepository = unitOfWork.GetRepository<MailContact>();
         }
 
         // GET api/ContactsApi
@@ -335,8 +339,25 @@ namespace Xaviers.Controllers
 
                     unitOfWork.Save();
                 }
-                
 
+                AddUpdateMailGroup(contact);
+
+                Expression<Func<MailContact, bool>> expr = sel => sel.ContactId == contact.ContactId;
+                List<MailContact> mailContacts = mailContactRepository.GetAll(expr).ToList();
+                if (mailContacts != null && mailContacts.Count > 0)
+                {
+                    foreach (MailContact mailContact in mailContacts)
+                    {
+                        MailContact contactcollection = mailContactRepository.Single(mailContact.Id);
+                        if (contactcollection.Id == contact.ContactId)
+                        {
+                            contactcollection.ContactName = string.Format("{0}  {1} - {2}", contact.FirstName, contact.LastName, contact.ContactId);
+                            contactcollection.Email = contact.Email;
+                        }
+                        mailContactRepository.Update(contactcollection);
+                        unitOfWork.Save();
+                    }
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -379,6 +400,8 @@ namespace Xaviers.Controllers
                 contact.CustomerId = auth.LoggedinUser.CustomerId;
                 contactRepository.Add(contact);
                 unitOfWork.Save();
+
+                AddUpdateMailGroup(contact);
             }
             catch (DbUpdateException)
             {
@@ -424,6 +447,69 @@ namespace Xaviers.Controllers
                 throw;
             }
             return this.Request.CreateResponse(HttpStatusCode.NoContent);
+        }
+
+
+        //Add/update mail group
+        private void AddUpdateMailGroup(Contact contact)
+        {
+            List<MailContact> grpContacts = new List<MailContact>();
+            grpContacts.Add(new MailContact
+            {
+                ContactId = contact.ContactId,
+                ContactName = string.Format("{0} {1} - {2}", contact.FirstName, contact.LastName, contact.ContactId),
+                Email = contact.Email
+            });
+
+            if (contact.GroupId !=null && contact.GroupId > 0 && !string.IsNullOrEmpty(contact.GroupName))
+            {
+                MailGroup grp = mailgroupRepository.Single(contact.GroupId);
+                if (grp != null && grp.GroupName == contact.GroupName)
+                {
+                    if (grp != null && grp.MailContacts != null && grp.MailContacts.Count > 0)
+                    {
+                        grp.MailContacts.Add(new MailContact
+                        {
+                            ContactId = contact.ContactId,
+                            ContactName = string.Format("{0} {1} - {2}", contact.FirstName, contact.LastName, contact.ContactId),
+                            Email = contact.Email
+                        });
+                    }
+                    else
+                    {
+                        grp.MailContacts = grpContacts;
+                    }
+                    mailgroupRepository.Update(grp);
+                    unitOfWork.Save();
+                }
+                else
+                {
+                    SaveGroup(contact, grpContacts);
+                }
+            }
+            else if(!string.IsNullOrEmpty(contact.GroupName))
+            {
+                SaveGroup(contact, grpContacts);
+            }
+        }
+
+        private void SaveGroup(Contact contact, List<MailContact> grpContacts)
+        {
+            MailGroup grp = new MailGroup
+            {
+                GroupName = contact.GroupName,
+                CustomerId = contact.CustomerId,
+                Type = 1, // Annbiyam - group
+                CreatedBy = contact.ContactId,
+                ModifyBy = contact.CustomerId,
+                CreatedDate = DateTime.Now,
+                ModifyDate = DateTime.Now
+            };
+
+            grp.MailContacts = grpContacts;
+
+            mailgroupRepository.Add(grp);
+            unitOfWork.Save();
         }
 
         protected override void Dispose(bool disposing)

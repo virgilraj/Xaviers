@@ -17,7 +17,9 @@ namespace BusinessLayer
             string mailUser = ConfigurationManager.AppSettings["MailId"]; // "gamilid";
             string mailUserPwd = ConfigurationManager.AppSettings["MailPwd"];
             SmtpClient client = new SmtpClient(ConfigurationManager.AppSettings["SMTP"]);
-            client.Port = 587;
+            int port = 0;
+            int.TryParse(ConfigurationManager.AppSettings["MailPort"], out port);
+            client.Port = port;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
             System.Net.NetworkCredential credentials =

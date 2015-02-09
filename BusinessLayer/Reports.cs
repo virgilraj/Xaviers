@@ -417,7 +417,7 @@ namespace BusinessLayer
         {
             double openingBalcance = 0;
 
-            if((year - 1) == auth.LoggedinUser.StartFinanceYear)
+            if(year  == auth.LoggedinUser.StartFinanceYear)
             {
                 return auth.LoggedinUser.OpeningBalance;
             }
