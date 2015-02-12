@@ -491,6 +491,24 @@ namespace Xaviers.Controllers
             {
                 SaveGroup(contact, grpContacts);
             }
+            else if(contact.OldGrpId > 0) //delete from group
+            {
+                MailGroup grp = mailgroupRepository.Single(contact.GroupId);
+                if (grp != null)
+                {
+                    if (grp != null && grp.MailContacts != null && grp.MailContacts.Count > 0)
+                    {
+                        var mailContact = grp.MailContacts.Where(a => a.ContactId == contact.ContactId && a.Id == contact.OldGrpId).ToList();
+                        if (mailContact != null && mailContact.Count > 0)
+                        {
+                            grp.MailContacts.Remove((MailContact)mailContact[0]);
+                        }
+                    }
+                    
+                    mailgroupRepository.Update(grp);
+                    unitOfWork.Save();
+                }
+            }
         }
 
         private void SaveGroup(Contact contact, List<MailContact> grpContacts)
