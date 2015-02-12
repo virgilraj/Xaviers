@@ -73,6 +73,7 @@ namespace DatabaseDataModel
         public Nullable<int> GroupId { get; set; }
         public string GroupName { get; set; }
         public bool IsNameChanged { get; set; }
+        public int OldGrpId { get; set; }
     
         public virtual ICollection<Qualification> Qualifications { get; set; }
         public virtual ICollection<User> Users { get; set; }

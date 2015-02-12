@@ -169,6 +169,7 @@
                         <div class="row">
                             <div class="large-4 columns">&nbsp; </div>
                             <div class="large-4 columns align-center">
+                                <div ng-hide="true" id="oldgrpId" ng-model="Contact.GroupId"></div>
                                 <div ng-hide="true" id="ContactId" ng-model="Contact.ContactId"></div>
                                 <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-click="reset()" type="button" value="Reset" />
                                 <input id="Submit1" ng-disabled="isView" class="small button radius round" ng-hide="!isUpdate" ng-show="isUpdate" ng-click="update(myForm)" type="button" value="Update" />
